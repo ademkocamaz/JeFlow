@@ -32,6 +32,8 @@ if 'SECRET_KEY' in os.environ:
 if not IS_HEROKU:
     DEBUG = True
 
+DEBUG = True
+
 if IS_HEROKU:
     ALLOWED_HOSTS = ["*"]
 else:
