@@ -1,1 +1,1 @@
-web: gunicorn JeFlow.wsgi --log-file -
+web: gunicorn JeFlow.wsgi
