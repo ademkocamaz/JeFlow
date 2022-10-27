@@ -9,3 +9,6 @@ class Customer(models.Model):
 
 class Job(models.Model):
     pass
+
+class Activity(models.Model):
+    pass
