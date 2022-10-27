@@ -6,3 +6,6 @@ class Service(models.Model):
 
 class Customer(models.Model):
     pass
+
+class Job(models.Model):
+    pass
