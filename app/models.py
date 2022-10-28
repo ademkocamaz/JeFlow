@@ -12,3 +12,6 @@ class Job(models.Model):
 
 class Activity(models.Model):
     pass
+
+class Process(models.Model):
+    pass
