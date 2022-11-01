@@ -47,12 +47,16 @@
                 <input type="hidden">
               </form>
             </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">{{ user }}</a>
+            </li>
             {% else %}
             <li class="nav-item">
               <a class="nav-link" href="{% url 'register' %}">Kayıt Ol</a>
             </li>
             {% endif %}
           </ul>
+          
         </div>
 
       </div>

@@ -1,4 +1,6 @@
 from django.db import models
+from django.conf import settings
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -6,6 +8,7 @@ class Category(models.Model):
     name=models.CharField(max_length=500,verbose_name='Kategori Adı')
     description=models.TextField(verbose_name='Kategori Açıklaması', blank=True, null=True)
     created_date=models.DateTimeField(auto_now_add=True, verbose_name='Oluşturulma Tarihi')
+    user=models.ForeignKey(User,on_delete=models.CASCADE,verbose_name='Kullanıcı', blank=True, null=True)
 
     def __str__(self):
         return self.name # + ' - ' + self.created_date.strftime("%d.%m.%Y, %H:%M:%S")
@@ -20,6 +23,7 @@ class Process(models.Model):
     description=models.TextField(verbose_name='İş Akış Açıklaması', blank=True, null=True)
     state=models.CharField(max_length=100,verbose_name='Durumu', blank=True, null=True)
     created_date=models.DateTimeField(auto_now_add=True, verbose_name='Oluşturulma Tarihi')
+    user=models.ForeignKey(User,on_delete=models.CASCADE,verbose_name='Kullanıcı', blank=True, null=True)
 
     def __str__(self):
         return self.name # + ' - ' + self.created_date.strftime("%d.%m.%Y, %H:%M:%S")
@@ -34,6 +38,7 @@ class Activity(models.Model):
     description=models.TextField(verbose_name='Aktivite Açıklaması', blank=True,null=True)
     observation=models.TextField(verbose_name='Gözlem', blank=True,null=True)
     created_date=models.DateTimeField(auto_now_add=True, verbose_name='Oluşturulma Tarihi')
+    user=models.ForeignKey(User,on_delete=models.CASCADE,verbose_name='Kullanıcı', blank=True, null=True)
 
     def __str__(self):
         return self.name # + ' - ' + self.created_date.strftime("%d.%m.%Y, %H:%M:%S")
@@ -48,6 +53,7 @@ class Task(models.Model):
     description=models.TextField(verbose_name='Görev Açıklaması', blank=True, null=True)
     is_completed=models.BooleanField(default=False, verbose_name='Tamamlandı Mı?')
     created_date=models.DateTimeField(auto_now_add=True, verbose_name='Oluşturulma Tarihi')
+    user=models.ForeignKey(User,on_delete=models.CASCADE,verbose_name='Kullanıcı', blank=True, null=True)
 
     def __str__(self):
         return self.name # + ' - ' + self.created_date.strftime("%d.%m.%Y, %H:%M:%S")

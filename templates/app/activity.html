@@ -16,6 +16,7 @@
                     <th scope="col">Aktivite Açıklaması</th>
                     <th scope="col">Gözlem</th>
                     <th scope="col">Oluşturulma Tarihi</th>
+                    <th scope="col">Düzenleyen</th>
                 </tr>
             </thead>
             <tbody>
@@ -27,6 +28,7 @@
                     <td>{{ activity.description }}</td>
                     <td>{{ activity.observation }}</td>
                     <td>{{ activity.created_date }} | {{ activity.created_date | timesince}} önce</td>
+                    <td>{{ activity.user }}</td>
                 </tr>
                 {% endfor %}
             </tbody>

@@ -16,6 +16,7 @@
                     <th scope="col">Görev Açıklaması</th>
                     <th scope="col">Görev Durumu</th>
                     <th scope="col">Oluşturulma Tarihi</th>
+                    <th scope="col">Düzenleyen</th>
                 </tr>
             </thead>
             <tbody>
@@ -33,6 +34,7 @@
                         {% endif %}
                     </td>
                     <td>{{ task.created_date }} | {{ task.created_date | timesince}} önce</td>
+                    <td>{{ task.user }}</td>
                 </tr>
                 {% endfor %}
             </tbody>

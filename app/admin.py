@@ -5,31 +5,33 @@ from .models import Category, Process, Activity, Task
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'created_date')
+    list_display = ('id', 'name', 'created_date', 'user')
     list_display_links = ('id', 'name')
     list_filter = ('created_date',)
-    # list_editable = ('name',)
+    # list_editable = ('user',)
     search_fields = ('name', 'description')
     # list_per_page = 20
 
 
 class ProcessAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'category', 'state', 'created_date')
+    list_display = ('id', 'name', 'category', 'state', 'created_date', 'user')
     list_display_links = ('id', 'name')
     list_filter = ('created_date',)
     search_fields = ('name', 'description')
+    # list_editable = ('user',)
     # list_per_page = 20
 
 
 class ActivityAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'process', 'created_date')
+    list_display = ('id', 'name', 'process', 'created_date', 'user')
     list_display_links = ('id', 'name')
     list_filter = ('created_date',)
     search_fields = ('name', 'description','observation')
+    # list_editable = ('user',)
     # list_per_page = 20
 
 class TaskAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'process', 'created_date','is_completed')
+    list_display = ('id', 'name', 'process', 'created_date','is_completed', 'user')
     list_display_links = ('id', 'name')
     list_filter = ('created_date',)
     list_editable = ('is_completed',)

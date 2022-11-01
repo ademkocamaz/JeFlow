@@ -13,13 +13,13 @@ def login(request):
         user=auth.authenticate(username=username,password=password)
         if user is not None:
             auth.login(request,user)
-            messages.add_message(request,messages.SUCCESS,'Oturum açıldı.')
-            messages.add_message(request,messages.INFO,'Hoşgeldiniz.')
+            messages.add_message(request,messages.SUCCESS, 'Oturum açıldı.')
+            messages.add_message(request,messages.INFO, username + ' Hoşgeldiniz.')
             return redirect('index')
         else:
-            messages.add_message(request,messages.ERROR,'Kullanıcı adı veya Parola yanlış')
+            messages.add_message(request,messages.ERROR, 'Kullanıcı adı veya Parola yanlış')
     
-    return render(request,'user/login.html')
+    return render(request, 'user/login.html')
     
 def register(request):
     if request.method=='POST':
