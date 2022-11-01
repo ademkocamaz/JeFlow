@@ -5,6 +5,7 @@ from django.contrib import messages
 # Create your views here.
 
 def login(request):
+    messages.add_message(request,messages.INFO,'demo / demo ile giriş yapabilirsiniz')
     if request.method=='POST':
         username=request.POST['username']
         password=request.POST['password']

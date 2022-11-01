@@ -40,3 +40,17 @@ class Activity(models.Model):
     class Meta:
         verbose_name="Aktive"
         verbose_name_plural='Aktiviteler'
+
+class Task(models.Model):
+    process_detail=models.ForeignKey(ProcessDetail,on_delete=models.CASCADE,verbose_name='İş Adı')
+    name=models.CharField(max_length=500,verbose_name='Görev Adı')
+    description=models.TextField(verbose_name='Görev Açıklaması')
+    is_completed=models.BooleanField(default=False,verbose_name='Tamamlandı Mı?')
+    created_date=models.DateTimeField(auto_now_add=True, verbose_name='Oluşturulma Tarihi')
+
+    def __str__(self):
+        return self.name # + ' - ' + self.created_date.strftime("%d.%m.%Y, %H:%M:%S")
+
+    class Meta:
+        verbose_name="Görev"
+        verbose_name_plural='Görevler'
