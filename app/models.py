@@ -52,6 +52,7 @@ class Task(models.Model):
     name=models.CharField(max_length=500,verbose_name='Görev Adı')
     description=models.TextField(verbose_name='Görev Açıklaması', blank=True, null=True)
     is_completed=models.BooleanField(default=False, verbose_name='Tamamlandı Mı?')
+    assigned_user=models.OneToOneField(User,on_delete=models.SET_NULL,related_name='assigned_user',verbose_name='Atanan Personel', blank=True, null=True)
     created_date=models.DateTimeField(auto_now_add=True, verbose_name='Oluşturulma Tarihi')
     user=models.ForeignKey(User,on_delete=models.CASCADE,verbose_name='Kullanıcı', blank=True, null=True)
 
