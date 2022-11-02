@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Process, Activity, Task
+from .models import Category, Process, Activity, Task, State
 
 # Register your models here.
 
@@ -18,7 +18,7 @@ class ProcessAdmin(admin.ModelAdmin):
     list_display_links = ('id', 'name')
     list_filter = ('created_date',)
     search_fields = ('name', 'description')
-    # list_editable = ('user',)
+    list_editable = ('state',)
     # list_per_page = 20
 
 
@@ -31,15 +31,21 @@ class ActivityAdmin(admin.ModelAdmin):
     # list_per_page = 20
 
 class TaskAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'process', 'created_date','is_completed', 'user')
+    list_display = ('id', 'name', 'process', 'created_date','state', 'user')
     list_display_links = ('id', 'name')
     list_filter = ('created_date',)
-    list_editable = ('is_completed',)
+    list_editable = ('state',)
     search_fields = ('name', 'description')
     # list_per_page = 20
 
+class StateAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name',)
+    list_display_links = ('id',)
+    list_editable = ('name',)
+    search_fields = ('name',)
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Process, ProcessAdmin)
 admin.site.register(Activity,ActivityAdmin)
 admin.site.register(Task,TaskAdmin)
+admin.site.register(State,StateAdmin)

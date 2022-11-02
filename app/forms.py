@@ -22,4 +22,4 @@ class ActivityForm(forms.ModelForm):
 class TaskForm(forms.ModelForm):
     class Meta:
         model=Task
-        fields=('process','name','description','assigned_user','is_completed')
+        fields=('process','name','description','assigned_user','state')

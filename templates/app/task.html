@@ -55,10 +55,10 @@
                     <td>{{ task.name }}</td>
                     <td>{{ task.description }}</td>
                     <td>
-                        {% if task.is_completed %}
-                        Tamamlandı
+                        {% if task.state is not None %}
+                        {{task.state}}
                         {% else %}
-                        Tamamlanmadı
+                        -
                         {% endif %}
                     </td>
                     <td>{{ task.created_date }} | {{ task.created_date | timesince}} önce</td>

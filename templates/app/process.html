@@ -53,7 +53,13 @@
                     <td>{{ process.category }}</td>
                     <td>{{ process.name }}</td>
                     <td>{{ process.description }}</td>
-                    <td>{{ process.state }}</td>
+                    <td>
+                        {% if process.state is not None %}
+                        {{ process.state }}
+                        {% else %}
+                        -
+                        {% endif %}
+                    </td>
                     <td>{{ process.created_date }} | {{ process.created_date | timesince}} önce</td>
                     <td>{{ process.user }}</td>
                     <td>
