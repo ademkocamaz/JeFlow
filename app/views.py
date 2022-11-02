@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import Category, Process, Activity, Task
-from .forms import CategoryForm, ProcessForm
+from .forms import CategoryForm, ProcessForm, ActivityForm, TaskForm
 
 # Create your views here.
 
@@ -91,15 +91,78 @@ def process_detail(request,process_id):
     return render(request,'app/process_detail.html',context)
 
 def activity(request):
+    if request.method=='POST':
+        activity_form=ActivityForm(request.POST)
+        if activity_form.is_valid():
+            activity_form.instance.user=request.user
+            activity_form.save()
+            messages.add_message(request,messages.INFO,'Aktivite eklendi.')
+        else:
+            messages.add_message(request,messages.INFO,'Aktivite eklenirken hata oluştu.')
+        return redirect('activity')
+    activity_form=ActivityForm()
     activities = Activity.objects.order_by('created_date')
     context = {
+        'activity_form':activity_form,
         'activities': activities
     }
     return render(request, 'app/activity.html', context)
 
+def activity_detail(request,activity_id):
+    activity=get_object_or_404(Activity,pk=activity_id)
+
+    if request.method=='POST':
+        activity_form=ActivityForm(request.POST,instance=activity)
+        if activity_form.is_valid():
+            activity_form.instance.user=request.user
+            activity_form.save()
+            messages.add_message(request,messages.INFO,'Aktivite güncellendi.')
+        else:
+            messages.add_message(request,messages.INFO,'Aktivite güncellenirken hata oluştu.')
+        return redirect('activity_detail',activity_id)
+    
+    activity_form=ActivityForm(instance=activity)
+    context={
+        'activity_form':activity_form,
+        'activity':activity
+    }
+    return render(request,'app/activity_detail.html',context)
+
 def task(request):
+    if request.method=='POST':
+        task_form=TaskForm(request.POST)
+        if task_form.is_valid():
+            task_form.instance.user=request.user
+            task_form.save()
+            messages.add_message(request,messages.INFO,'Görev eklendi.')
+        else:
+            messages.add_message(request,messages.INFO,'Görev eklenirken hata oluştu.')
+        return redirect('task')
+    
+    task_form=TaskForm()
     tasks = Task.objects.order_by('created_date')
     context = {
+        'task_form':task_form,
         'tasks': tasks
     }
     return render(request, 'app/task.html', context)
+
+def task_detail(request,task_id):
+    task=get_object_or_404(Task,pk=task_id)
+
+    if request.method=='POST':
+        task_form=TaskForm(request.POST,instance=task)
+        if task_form.is_valid():
+            task_form.instance.user=request.user
+            task_form.save()
+            messages.add_message(request,messages.INFO,'Görev güncellendi.')
+        else:
+            messages.add_message(request,messages.INFO,'Görev güncellenirken hata oluştu.')
+        return redirect('task_detail',task_id)
+    
+    task_form=TaskForm(instance=task)
+    context={
+        'task_form':task_form,
+        'task':task
+    }
+    return render(request,'app/task_detail.html',context)

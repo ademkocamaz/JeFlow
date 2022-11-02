@@ -3,7 +3,30 @@
 
 {% block content %}
 {{ name }}
+{% load crispy_forms_tags %}
+<div class="row">
+    <div class="accordion accordion-flush" id="accordionFlush">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingOne">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                    Yeni Ekle
+                </button>
+            </h2>
+            <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+                data-bs-parent="#accordionFlush">
+                <div class="accordion-body">
+                    <form action="{% url 'activity' %}" method="POST">
+                        {% csrf_token %}
+                        {{activity_form|crispy}}
+                        <button class="btn btn-dark my-4" type="submit">Ekle</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
+</div>
 <div class="row">
     <div class="col-md-12">
         {% if activities %}
@@ -24,7 +47,7 @@
                 <tr>
                     <th scope="row">{{ activity.id }}</th>
                     <td>{{ activity.process }}</td>
-                    <td>{{ activity.name }}</td>
+                    <td><a href="{% url 'activity_detail' activity.id %}" class="btn btn-dark">{{ activity.name }}</a></td>
                     <td>{{ activity.description }}</td>
                     <td>{{ activity.observation }}</td>
                     <td>{{ activity.created_date }} | {{ activity.created_date | timesince}} önce</td>
