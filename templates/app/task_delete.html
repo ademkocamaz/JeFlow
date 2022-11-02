@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+{% load humanize %}
+
+{% block content %}
+{{ name }}
+<div class="row">
+    <div class="alert alert-danger d-flex align-items-center" role="alert">
+        <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:">
+            <use xlink:href="#exclamation-triangle-fill" />
+        </svg>
+        <div>
+            {{ task.name }} isimli kaydı silmek istediğinize emin misiniz?
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col"></div>
+    <div class="col-auto">
+        <form action="{% url 'task_delete' task.id %}" method="POST">
+            {% csrf_token %}
+            <button class="btn btn-danger my-4" type="submit">
+                <i class="fa-solid fa-trash fa-2xl"></i><br>Sil
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

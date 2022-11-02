@@ -10,7 +10,9 @@
             <h2 class="accordion-header" id="flush-headingOne">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                     data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                    Yeni Ekle
+                    <div class="btn btn-warning">
+                        Yeni Ekle
+                    </div>
                 </button>
             </h2>
             <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
@@ -41,6 +43,8 @@
                     <th scope="col">Oluşturulma Tarihi</th>
                     <th scope="col">Atanan Personel</th>
                     <th scope="col">Düzenleyen</th>
+                    <th scope="col">İşlemler</th>
+
                 </tr>
             </thead>
             <tbody>
@@ -48,7 +52,7 @@
                 <tr>
                     <th scope="row">{{ task.id }}</th>
                     <td>{{ task.process }}</td>
-                    <td><a href="{% url 'task_detail' task.id %}" class="btn btn-dark">{{ task.name }}</a></td>
+                    <td>{{ task.name }}</td>
                     <td>{{ task.description }}</td>
                     <td>
                         {% if task.is_completed %}
@@ -66,6 +70,16 @@
                         {% endif %}
                     </td>
                     <td>{{ task.user }}</td>
+                    <td>
+                        <a class="btn btn-success" href="{% url 'task_detail' task.id %}">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                            Düzenle
+                        </a>
+                        <a href="{% url 'task_delete' task.id %}" class="btn btn-danger">
+                            <i class="fa-solid fa-trash"></i>
+                            Sil
+                        </a>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>

@@ -5,12 +5,15 @@
 {{ name }}
 {% load crispy_forms_tags %}
 <div class="row">
+    <i class="fa-solid fa-file-plus"></i>
     <div class="accordion accordion-flush" id="accordionFlush">
         <div class="accordion-item">
             <h2 class="accordion-header" id="flush-headingOne">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                     data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                    Yeni Ekle
+                    <div class="btn btn-warning">
+                        Yeni Ekle
+                    </div>
                 </button>
             </h2>
             <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
@@ -40,6 +43,7 @@
                     <th scope="col">İş Durumu</th>
                     <th scope="col">Oluşturulma Tarihi</th>
                     <th scope="col">Düzenleyen</th>
+                    <th scope="col">İşlemler</th>
                 </tr>
             </thead>
             <tbody>
@@ -47,11 +51,21 @@
                 <tr>
                     <th scope="row">{{ process.id }}</th>
                     <td>{{ process.category }}</td>
-                    <td><a href="{% url 'process_detail' process.id %}" class="btn btn-dark">{{ process.name }}</a></td>
+                    <td>{{ process.name }}</td>
                     <td>{{ process.description }}</td>
                     <td>{{ process.state }}</td>
                     <td>{{ process.created_date }} | {{ process.created_date | timesince}} önce</td>
                     <td>{{ process.user }}</td>
+                    <td>
+                        <a class="btn btn-success" href="{% url 'process_detail' process.id %}">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                            Düzenle
+                        </a>
+                        <a href="{% url 'process_delete' process.id %}" class="btn btn-danger">
+                            <i class="fa-solid fa-trash"></i>
+                            Sil
+                        </a>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>

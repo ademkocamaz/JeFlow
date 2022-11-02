@@ -51,6 +51,19 @@ def category_detail(request,category_id):
     }
     return render(request,'app/category_detail.html',context)
 
+def category_delete(request,category_id):
+    category=get_object_or_404(Category,pk=category_id)
+
+    if request.method=='POST':
+        category.delete()
+        messages.add_message(request,messages.INFO, category.name + ' silindi.')
+        return redirect('category')
+    
+    context={
+        'category':category
+    }
+    return render(request,'app/category_delete.html',context)
+
 def process(request):
     if request.method=='POST':
         process_form=ProcessForm(request.POST)
@@ -90,6 +103,19 @@ def process_detail(request,process_id):
     }
     return render(request,'app/process_detail.html',context)
 
+def process_delete(request,process_id):
+    process=get_object_or_404(Process,pk=process_id)
+
+    if request.method=='POST':
+        process.delete()
+        messages.add_message(request,messages.INFO, process.name + ' silindi.')
+        return redirect('process')
+    
+    context={
+        'process':process
+    }
+    return render(request,'app/process_delete.html',context)
+
 def activity(request):
     if request.method=='POST':
         activity_form=ActivityForm(request.POST)
@@ -127,6 +153,19 @@ def activity_detail(request,activity_id):
         'activity':activity
     }
     return render(request,'app/activity_detail.html',context)
+
+def activity_delete(request,activity_id):
+    activity=get_object_or_404(Activity,pk=activity_id)
+
+    if request.method=='POST':
+        activity.delete()
+        messages.add_message(request,messages.INFO, activity.name + ' silindi.')
+        return redirect('activity')
+    
+    context={
+        'activity':activity
+    }
+    return render(request,'app/activity_delete.html',context)
 
 def task(request):
     if request.method=='POST':
@@ -166,3 +205,16 @@ def task_detail(request,task_id):
         'task':task
     }
     return render(request,'app/task_detail.html',context)
+
+def task_delete(request,task_id):
+    task=get_object_or_404(Task,pk=task_id)
+
+    if request.method=='POST':
+        task.delete()
+        messages.add_message(request,messages.INFO, task.name + ' silindi.')
+        return redirect('task')
+    
+    context={
+        'task':task
+    }
+    return render(request,'app/task_delete.html',context)
