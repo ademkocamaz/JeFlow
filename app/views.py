@@ -9,7 +9,18 @@ from .forms import CategoryForm, ProcessForm, ActivityForm, TaskForm
 
 @login_required(login_url='/user/login/')
 def index(request):
-    return render(request, 'app/index.html')
+    category_count=Category.objects.count()
+    process_count=Process.objects.count()
+    activity_count=Activity.objects.count()
+    task_count=Task.objects.count()
+
+    context={
+        'category_count':category_count,
+        'process_count':process_count,
+        'activity_count':activity_count,
+        'task_count':task_count
+    }
+    return render(request, 'app/index.html',context)
 
 
 def category(request):
