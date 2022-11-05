@@ -2,62 +2,98 @@
 {% load humanize %}
 
 {% block content %}
-<div class="row">
+<div class="row mt-3">
     <div class="col">
-        <div class="card text-bg-primary bg-gradient mb-3" style="max-width: 18rem;">
+        <div class="card text-bg-primary bg-gradient" style="max-width: 18rem;">
             <div class="card-header">
-                <h3>Kategoriler</h3>
+                <h3 class="card-title">
+                    <i class="fa-solid fa-list"></i>
+                    Kategoriler
+                </h3>
             </div>
             <div class="card-body">
-                <h5 class="card-title">{{ category_count }} Adet.</h5>
+                <h4 class="card-title">{{ category_count }} Adet.</h5>
+            </div>
+            <div class="card-footer text-center">
+                <a class="btn btn-primary" href="{% url 'category' %}">
+                    Daha Fazla
+                    <i class="fa-solid fa-circle-arrow-right"></i>
+                </a>
             </div>
         </div>
     </div>
     <div class="col">
-        <div class="card text-bg-secondary bg-gradient mb-3" style="max-width: 18rem;">
+        <div class="card text-bg-secondary bg-gradient" style="max-width: 18rem;">
             <div class="card-header">
-                <h3>İş Akışları</h3>
+                <h3 class="card-title">
+                    <i class="fa-solid fa-business-time"></i>
+                    İş Akışları
+                </h3>
             </div>
             <div class="card-body">
-                <h5 class="card-title">{{ process_count }} Adet.</h5>
+                <h4 class="card-title">{{ process_count }} Adet.</h5>
+            </div>
+            <div class="card-footer text-center">
+                <a class="btn btn-secondary" href="{% url 'process' %}">
+                    Daha Fazla
+                    <i class="fa-solid fa-circle-arrow-right"></i>
+                </a>
             </div>
         </div>
     </div>
     <div class="col">
-        <div class="card text-bg-success bg-gradient mb-3" style="max-width: 18rem;">
+        <div class="card text-bg-success bg-gradient" style="max-width: 18rem;">
             <div class="card-header">
-                <h3>Aktiviteler</h3>
+                <h3 class="card-title">
+                    <i class="fa-solid fa-microchip"></i>
+                    Aktiviteler
+                </h3>
             </div>
             <div class="card-body">
-                <h5 class="card-title">{{ activity_count }} Adet.</h5>
+                <h4 class="card-title">{{ activity_count }} Adet.</h5>
+            </div>
+            <div class="card-footer text-center">
+                <a class="btn btn-success" href="{% url 'activity' %}">
+                    Daha Fazla
+                    <i class="fa-solid fa-circle-arrow-right"></i>
+                </a>
             </div>
         </div>
     </div>
     <div class="col">
-        <div class="card text-bg-danger bg-gradient mb-3" style="max-width: 18rem;">
+        <div class="card text-bg-danger bg-gradient" style="max-width: 18rem;">
             <div class="card-header">
-                <h3>Görevler</h3>
+                <h3 class="card-title">
+                    <i class="fa-solid fa-list-check"></i>
+                    Görevler
+                </h3>
             </div>
             <div class="card-body">
-                <h5 class="card-title">{{ task_count }} Adet.</h5>
+                <h4 class="card-title">{{ task_count }} Adet.</h5>
+            </div>
+            <div class="card-footer text-center">
+                <a class="btn btn-danger" href="{% url 'task' %}">
+                    Daha Fazla
+                    <i class="fa-solid fa-circle-arrow-right"></i>
+                </a>
             </div>
         </div>
     </div>
 </div>
 
-<div class="row">
+<div class="row mt-3">
     <div class="col">
-    <div class="card text-bg-warning bg-gradient">
-        <div class="card-header border-0">
-          <h3 class="card-title">
-            <i class="far fa-calendar-alt"></i>
-            Takvim
-          </h3>
+        <div class="card text-bg-warning bg-gradient">
+            <div class="card-header">
+                <h3 class="card-title">
+                    <i class="fa-solid fa-bullhorn"></i>
+                    Duyurular
+                </h3>
+            </div>
+            <div class="card-body">
+                <p class="card-text"><i class="fa-solid fa-bullhorn"></i> demo yeni kategori ekledi</p>
+            </div>
         </div>
-        <div class="card-body">
-          
-        </div>
-      </div>
     </div>
 </div>
 
