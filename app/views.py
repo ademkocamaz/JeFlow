@@ -3,7 +3,6 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import Category, Process, Activity, Task
 from .forms import CategoryForm, ProcessForm, ActivityForm, TaskForm
-
 # Create your views here.
 
 
@@ -81,7 +80,6 @@ def category_detail(request,category_id):
         'category':category
     }
     return render(request,'app/category_detail.html',context)
-
 
 def process(request):
     if request.method=='POST':
