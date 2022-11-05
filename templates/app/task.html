@@ -5,14 +5,6 @@
 {{ name }}
 {% load crispy_forms_tags %}
 
-<div class="row mt-3">
-    <div class="col-2">
-        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            Yeni Ekle
-        </button>
-    </div>
-</div>
-
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -36,76 +28,89 @@
 
 <div class="row mt-3">
     <div class="col-md-12">
-        {% if tasks %}
-        <table id="task" class="table table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">İş Adı</th>
-                    <th scope="col">Görev Adı</th>
-                    <th scope="col">Görev Açıklaması</th>
-                    <th scope="col">Görev Durumu</th>
-                    <th scope="col">Oluşturulma Tarihi</th>
-                    <th scope="col">Atanan Personel</th>
-                    <th scope="col">Düzenleyen</th>
-                    <th scope="col">İşlemler</th>
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">
+                    <i class="fa-solid fa-list-check"></i>
+                    Görevler
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Yeni Ekle
+                    </button>
+                </h3>
+            </div>
+            <div class="card-body">
+                {% if tasks %}
+                <table id="task" class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">İş Adı</th>
+                            <th scope="col">Görev Adı</th>
+                            <th scope="col">Görev Açıklaması</th>
+                            <th scope="col">Görev Durumu</th>
+                            <th scope="col">Oluşturulma Tarihi</th>
+                            <th scope="col">Atanan Personel</th>
+                            <th scope="col">Düzenleyen</th>
+                            <th scope="col">İşlemler</th>
 
-                </tr>
-            </thead>
-            <tbody>
-                {% for task in tasks %}
-                <tr>
-                    <th scope="row">{{ task.id }}</th>
-                    <td>{{ task.process }}</td>
-                    <td>{{ task.name }}</td>
-                    <td>{{ task.description }}</td>
-                    <td>
-                        {% if task.state is not None %}
-                        {{task.state}}
-                        {% else %}
-                        -
-                        {% endif %}
-                    </td>
-                    <td>{{ task.created_date }} | {{ task.created_date | timesince}} önce</td>
-                    <td>
-                        {% if task.assigned_user is not None%}
-                        {{ task.assigned_user }}
-                        {% else %}
-                        Atanmamış
-                        {% endif %}
-                    </td>
-                    <td>{{ task.user }}</td>
-                    <td>
-                        <a class="btn btn-success bg-gradient" href="{% url 'task_update' task.id %}">
-                            <i class="fa-solid fa-pen-to-square"></i>
-                            Düzenle
-                        </a>
-                        <a class="btn btn-danger bg-gradient" href="{% url 'task_delete' task.id %}">
-                            <i class="fa-solid fa-trash"></i>
-                            Sil
-                        </a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for task in tasks %}
+                        <tr>
+                            <th scope="row">{{ task.id }}</th>
+                            <td>{{ task.process }}</td>
+                            <td>{{ task.name }}</td>
+                            <td>{{ task.description }}</td>
+                            <td>
+                                {% if task.state is not None %}
+                                {{task.state}}
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td>{{ task.created_date }} | {{ task.created_date | timesince}} önce</td>
+                            <td>
+                                {% if task.assigned_user is not None%}
+                                {{ task.assigned_user }}
+                                {% else %}
+                                Atanmamış
+                                {% endif %}
+                            </td>
+                            <td>{{ task.user }}</td>
+                            <td>
+                                <a class="btn btn-success bg-gradient" href="{% url 'task_update' task.id %}">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                    Düzenle
+                                </a>
+                                <a class="btn btn-danger bg-gradient" href="{% url 'task_delete' task.id %}">
+                                    <i class="fa-solid fa-trash"></i>
+                                    Sil
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
 
-        {% else %}
-        <div class="alert alert-warning">
-            <p>Görev bulunamadı.</p>
+                {% else %}
+                <div class="alert alert-warning">
+                    <p>Görev bulunamadı.</p>
+                </div>
+                {% endif %}
+            </div>
         </div>
-        {% endif %}
     </div>
 </div>
 
 <script>
-    $(document).ready( function () {
+    $(document).ready(function () {
         $('#task').DataTable({
             language: {
                 url: 'https://cdn.datatables.net/plug-ins/1.12.1/i18n/tr.json'
             }
         });
-    } );
+    });
 </script>
 
 {% endblock %}
