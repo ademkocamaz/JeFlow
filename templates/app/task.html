@@ -4,32 +4,37 @@
 {% block content %}
 {{ name }}
 {% load crispy_forms_tags %}
-<div class="row">
-    <div class="accordion accordion-flush" id="accordionFlush">
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="flush-headingOne">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                    <div class="btn btn-warning">
-                        Yeni Ekle
-                    </div>
-                </button>
-            </h2>
-            <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
-                data-bs-parent="#accordionFlush">
-                <div class="accordion-body">
-                    <form action="{% url 'task' %}" method="POST">
-                        {% csrf_token %}
-                        {{task_form|crispy}}
-                        <button class="btn btn-dark my-4" type="submit">Ekle</button>
-                    </form>
-                </div>
+
+<div class="row mt-3">
+    <div class="col-2">
+        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Yeni Ekle
+        </button>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Yeni Aktivite</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{% url 'task' %}" method="POST">
+                    {% csrf_token %}
+                    {{task_form|crispy}}
+                    <button class="btn btn-dark my-4" type="submit">Ekle</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">İptal</button>
             </div>
         </div>
     </div>
-
 </div>
-<div class="row">
+
+<div class="row mt-3">
     <div class="col-md-12">
         {% if tasks %}
         <table id="task" class="table table-hover">
@@ -71,11 +76,11 @@
                     </td>
                     <td>{{ task.user }}</td>
                     <td>
-                        <a class="btn btn-success" href="{% url 'task_detail' task.id %}">
+                        <a class="btn btn-success bg-gradient" href="{% url 'task_update' task.id %}">
                             <i class="fa-solid fa-pen-to-square"></i>
                             Düzenle
                         </a>
-                        <a href="{% url 'task_delete' task.id %}" class="btn btn-danger">
+                        <a class="btn btn-danger bg-gradient" href="{% url 'task_delete' task.id %}">
                             <i class="fa-solid fa-trash"></i>
                             Sil
                         </a>

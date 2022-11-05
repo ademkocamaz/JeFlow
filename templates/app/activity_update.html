@@ -5,9 +5,9 @@
 {{ name }}
 {% load crispy_forms_tags %}
 <div class="row">
-    <form action="{% url 'task_detail' task.id %}" method="POST">
+    <form action="{% url 'activity_update' activity.id %}" method="POST">
         {% csrf_token %}
-        {{task_form|crispy}}
+        {{activity_form|crispy}}
         <button class="btn btn-dark my-4" type="submit">Güncelle</button>
     </form>
 </div>

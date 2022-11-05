@@ -42,7 +42,7 @@ def category(request):
     }
     return render(request, 'app/category.html', context)
 
-def category_detail(request,category_id):
+def category_update(request,category_id):
     category=get_object_or_404(Category,pk=category_id)
 
     if request.method=='POST':
@@ -53,14 +53,14 @@ def category_detail(request,category_id):
             messages.add_message(request,messages.INFO,'Kategori güncellendi.')
         else:
             messages.add_message(request,messages.INFO,'Kategori güncellenirken bir hata oluştu.')
-        return redirect('category_detail',category.id)
+        return redirect('category_update',category.id)
 
     category_form=CategoryForm(instance=category)
     context={
         'category_form':category_form,
         'category':category
     }
-    return render(request,'app/category_detail.html',context)
+    return render(request,'app/category_update.html',context)
 
 def category_delete(request,category_id):
     category=get_object_or_404(Category,pk=category_id)
@@ -74,6 +74,14 @@ def category_delete(request,category_id):
         'category':category
     }
     return render(request,'app/category_delete.html',context)
+
+def category_detail(request,category_id):
+    category=get_object_or_404(Category,pk=category_id)
+    context={
+        'category':category
+    }
+    return render(request,'app/category_detail.html',context)
+
 
 def process(request):
     if request.method=='POST':
@@ -94,7 +102,7 @@ def process(request):
     }
     return render(request, 'app/process.html', context)
 
-def process_detail(request,process_id):
+def process_update(request,process_id):
     process=get_object_or_404(Process,pk=process_id)
 
     if request.method=='POST':
@@ -105,14 +113,14 @@ def process_detail(request,process_id):
             messages.add_message(request,messages.INFO,'İş akışı güncellendi.')
         else:
             messages.add_message(request,messages.INFO,'İş akışı güncellenirken hata oluştu.')
-        return redirect('process_detail',process_id)
+        return redirect('process_update',process_id)
     
     process_form=ProcessForm(instance=process)
     context={
         'process_form':process_form,
         'process':process
     }
-    return render(request,'app/process_detail.html',context)
+    return render(request,'app/process_update.html',context)
 
 def process_delete(request,process_id):
     process=get_object_or_404(Process,pk=process_id)
@@ -145,7 +153,7 @@ def activity(request):
     }
     return render(request, 'app/activity.html', context)
 
-def activity_detail(request,activity_id):
+def activity_update(request,activity_id):
     activity=get_object_or_404(Activity,pk=activity_id)
 
     if request.method=='POST':
@@ -156,14 +164,14 @@ def activity_detail(request,activity_id):
             messages.add_message(request,messages.INFO,'Aktivite güncellendi.')
         else:
             messages.add_message(request,messages.INFO,'Aktivite güncellenirken hata oluştu.')
-        return redirect('activity_detail',activity_id)
+        return redirect('activity_update',activity_id)
     
     activity_form=ActivityForm(instance=activity)
     context={
         'activity_form':activity_form,
         'activity':activity
     }
-    return render(request,'app/activity_detail.html',context)
+    return render(request,'app/activity_update.html',context)
 
 def activity_delete(request,activity_id):
     activity=get_object_or_404(Activity,pk=activity_id)
@@ -197,7 +205,7 @@ def task(request):
     }
     return render(request, 'app/task.html', context)
 
-def task_detail(request,task_id):
+def task_update(request,task_id):
     task=get_object_or_404(Task,pk=task_id)
 
     if request.method=='POST':
@@ -208,14 +216,14 @@ def task_detail(request,task_id):
             messages.add_message(request,messages.INFO,'Görev güncellendi.')
         else:
             messages.add_message(request,messages.INFO,'Görev güncellenirken hata oluştu.')
-        return redirect('task_detail',task_id)
+        return redirect('task_update',task_id)
     
     task_form=TaskForm(instance=task)
     context={
         'task_form':task_form,
         'task':task
     }
-    return render(request,'app/task_detail.html',context)
+    return render(request,'app/task_update.html',context)
 
 def task_delete(request,task_id):
     task=get_object_or_404(Task,pk=task_id)
