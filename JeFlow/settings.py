@@ -46,6 +46,7 @@ else:
 INSTALLED_APPS = [
     'app',
     'user',
+    'log',
     'crispy_forms',
     'crispy_bootstrap5',
     'django.contrib.admin',
@@ -181,3 +182,45 @@ MESSAGE_TAGS = {
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    # 'filters': {
+    #     'user': {
+    #         '()': 'log.filters.UserFilter',
+    #     },
+    # },
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s %(user)s'
+        },
+        'simple': {
+            'format': '%(levelname)s %(asctime)s %(message)s %(user)s'
+        },
+    },
+    'handlers': {
+        'db_log': {
+            'level': 'INFO',
+            'class': 'log.handler.DatabaseLogHandler',
+            # 'filters': ['user'],
+            'formatter': 'verbose',
+        },
+    },
+    'loggers': {
+        'db': {
+            'handlers': ['db_log'],
+            'level': 'INFO',
+            # 'filters': ['user'],
+        },
+        'django': {
+            'handlers': ['db_log'],
+            'level': 'INFO',
+        },
+        'django.request': {
+            'handlers': ['db_log'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+    }
+}

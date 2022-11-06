@@ -3,8 +3,10 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import Category, Process, Activity, Task
 from .forms import CategoryForm, ProcessForm, ActivityForm, TaskForm
+import logging
 # Create your views here.
 
+logger=logging.getLogger('db')
 
 @login_required(login_url='/user/login/')
 def index(request):
@@ -21,7 +23,6 @@ def index(request):
     }
     return render(request, 'app/index.html',context)
 
-
 def category(request):
     if request.method=='POST':
         category_form=CategoryForm(request.POST)
@@ -29,8 +30,12 @@ def category(request):
             category_form.instance.user=request.user
             category_form.save()
             messages.add_message(request,messages.INFO,'Kategori eklendi.')
+            logger.info(category_form.instance.name+' adında kategori eklendi.')
+            
+
         else:
-            messages.add_message(request,messages.INFO,'Kategori eklenirken hata oluştu.')
+            messages.add_message(request,messages.ERROR,'Kategori eklenirken hata oluştu.')
+            logger.error(category_form.instance.name+' adında kategori eklenirken hata oluştu.')
         return redirect('category')
     
     category_form=CategoryForm()
