@@ -23,6 +23,7 @@ def index(request):
     }
     return render(request, 'app/index.html',context)
 
+@login_required(login_url='/user/login/')
 def category(request):
     if request.method=='POST':
         category_form=CategoryForm(request.POST)
@@ -30,9 +31,7 @@ def category(request):
             category_form.instance.user=request.user
             category_form.save()
             messages.add_message(request,messages.INFO,'Kategori eklendi.')
-            logger.info(category_form.instance.name+' adında kategori eklendi.')
-            
-
+            logger.info(category_form.instance.name+' adında kategori eklendi.', extra={'user':request.user})
         else:
             messages.add_message(request,messages.ERROR,'Kategori eklenirken hata oluştu.')
             logger.error(category_form.instance.name+' adında kategori eklenirken hata oluştu.')
@@ -46,6 +45,7 @@ def category(request):
     }
     return render(request, 'app/category.html', context)
 
+@login_required(login_url='/user/login/')
 def category_update(request,category_id):
     category=get_object_or_404(Category,pk=category_id)
 
@@ -66,6 +66,7 @@ def category_update(request,category_id):
     }
     return render(request,'app/category_update.html',context)
 
+@login_required(login_url='/user/login/')
 def category_delete(request,category_id):
     category=get_object_or_404(Category,pk=category_id)
 
@@ -79,6 +80,7 @@ def category_delete(request,category_id):
     }
     return render(request,'app/category_delete.html',context)
 
+@login_required(login_url='/user/login/')
 def category_detail(request,category_id):
     category=get_object_or_404(Category,pk=category_id)
     context={
@@ -86,6 +88,7 @@ def category_detail(request,category_id):
     }
     return render(request,'app/category_detail.html',context)
 
+@login_required(login_url='/user/login/')
 def process(request):
     if request.method=='POST':
         process_form=ProcessForm(request.POST)
@@ -105,6 +108,7 @@ def process(request):
     }
     return render(request, 'app/process.html', context)
 
+@login_required(login_url='/user/login/')
 def process_update(request,process_id):
     process=get_object_or_404(Process,pk=process_id)
 
@@ -125,6 +129,7 @@ def process_update(request,process_id):
     }
     return render(request,'app/process_update.html',context)
 
+@login_required(login_url='/user/login/')
 def process_delete(request,process_id):
     process=get_object_or_404(Process,pk=process_id)
 
@@ -138,6 +143,7 @@ def process_delete(request,process_id):
     }
     return render(request,'app/process_delete.html',context)
 
+@login_required(login_url='/user/login/')
 def activity(request):
     if request.method=='POST':
         activity_form=ActivityForm(request.POST)
@@ -156,6 +162,7 @@ def activity(request):
     }
     return render(request, 'app/activity.html', context)
 
+@login_required(login_url='/user/login/')
 def activity_update(request,activity_id):
     activity=get_object_or_404(Activity,pk=activity_id)
 
@@ -176,6 +183,7 @@ def activity_update(request,activity_id):
     }
     return render(request,'app/activity_update.html',context)
 
+@login_required(login_url='/user/login/')
 def activity_delete(request,activity_id):
     activity=get_object_or_404(Activity,pk=activity_id)
 
@@ -189,6 +197,7 @@ def activity_delete(request,activity_id):
     }
     return render(request,'app/activity_delete.html',context)
 
+@login_required(login_url='/user/login/')
 def task(request):
     if request.method=='POST':
         task_form=TaskForm(request.POST)
@@ -208,6 +217,7 @@ def task(request):
     }
     return render(request, 'app/task.html', context)
 
+@login_required(login_url='/user/login/')
 def task_update(request,task_id):
     task=get_object_or_404(Task,pk=task_id)
 
@@ -228,6 +238,7 @@ def task_update(request,task_id):
     }
     return render(request,'app/task_update.html',context)
 
+@login_required(login_url='/user/login/')
 def task_delete(request,task_id):
     task=get_object_or_404(Task,pk=task_id)
 
