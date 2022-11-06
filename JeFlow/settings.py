@@ -210,16 +210,16 @@ LOGGING = {
     'loggers': {
         'db': {
             'handlers': ['db_log'],
-            'level': 'INFO',
+            'level': 'DEBUG',
             # 'filters': ['user'],
         },
         'django': {
             'handlers': ['db_log'],
-            'level': 'INFO',
+            'level': 'DEBUG',
         },
         'django.request': {
             'handlers': ['db_log'],
-            'level': 'INFO',
+            'level': 'DEBUG',
             'propagate': False,
         },
     }
