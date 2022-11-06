@@ -22,11 +22,13 @@ class DatabaseLogHandler(logging.Handler):
 
         # print(record.__dict__)
 
+        user=record.__dict__.get('user')
         kwargs = {
             'logger_name': record.name,
             'level': record.levelno,
             'msg': msg,
             'trace': trace,
+            'user':user,
             # 'user':record.user,
         }
 
