@@ -31,10 +31,10 @@ def category(request):
             category_form.instance.user=request.user
             category_form.save()
             messages.add_message(request,messages.INFO,'Kategori eklendi.')
-            logger.info(category_form.instance.name+' adında kategori eklendi.', extra={'user':request.user})
+            logger.info(category_form.instance.name+' adında Kategori eklendi.', extra={'user':request.user})
         else:
             messages.add_message(request,messages.ERROR,'Kategori eklenirken hata oluştu.')
-            logger.error(category_form.instance.name+' adında kategori eklenirken hata oluştu.')
+            logger.error(category_form.instance.name+' adında Kategori eklenirken hata oluştu.', extra={'user':request.user})
         return redirect('category')
     
     category_form=CategoryForm()
@@ -55,8 +55,10 @@ def category_update(request,category_id):
             category_form.instance.user=request.user
             category_form.save()
             messages.add_message(request,messages.INFO,'Kategori güncellendi.')
+            logger.info(category.name+' adında kategori güncellendi.',extra={'user':request.user})
         else:
             messages.add_message(request,messages.INFO,'Kategori güncellenirken bir hata oluştu.')
+            logger.error(category.name+' adında kategori güncellenirken bir hata oluştu.',extra={'user':request.user})
         return redirect('category_update',category.id)
 
     category_form=CategoryForm(instance=category)
@@ -73,6 +75,7 @@ def category_delete(request,category_id):
     if request.method=='POST':
         category.delete()
         messages.add_message(request,messages.INFO, category.name + ' silindi.')
+        logger.info(category.name+' adında kategori silindi.',extra={'user':request.user})
         return redirect('category')
     
     context={
@@ -96,8 +99,10 @@ def process(request):
             process_form.instance.user=request.user
             process_form.save()
             messages.add_message(request,messages.INFO,'İş akışı eklendi.')
+            logger.info(process_form.instance.name+' adında İş Akışı eklendi.',extra={'user':request.user})
         else:
             messages.add_message(request,messages.INFO,'İş akışı eklenirken hata oluştu.')
+            logger.error(process_form.instance.name+' adında İş Akışı eklenirken hata oluştu.',extra={'user':request.user})
         return redirect('process')
 
     process_form=ProcessForm()
@@ -118,8 +123,10 @@ def process_update(request,process_id):
             process_form.instance.user=request.user
             process_form.save()
             messages.add_message(request,messages.INFO,'İş akışı güncellendi.')
+            logger.info(process.name+' adında İş Akışı güncellendi',extra={'user':request.user})
         else:
             messages.add_message(request,messages.INFO,'İş akışı güncellenirken hata oluştu.')
+            logger.error(process.name+' adında İş Akışı güncellenirken hata oluştu.',extra={'user':request.user})
         return redirect('process_update',process_id)
     
     process_form=ProcessForm(instance=process)
@@ -136,6 +143,7 @@ def process_delete(request,process_id):
     if request.method=='POST':
         process.delete()
         messages.add_message(request,messages.INFO, process.name + ' silindi.')
+        logger.info(process.name+' adında İş Akışı silindi',extra={'user':request.user})
         return redirect('process')
     
     context={
@@ -151,8 +159,10 @@ def activity(request):
             activity_form.instance.user=request.user
             activity_form.save()
             messages.add_message(request,messages.INFO,'Aktivite eklendi.')
+            logger.info(activity_form.instance.name+' adında Aktivite eklendi.',extra={'user':request.user})
         else:
             messages.add_message(request,messages.INFO,'Aktivite eklenirken hata oluştu.')
+            logger.error(activity_form.instance.name+' adında Aktivite eklenirken hata oluştu.',extra={'user':request.user})
         return redirect('activity')
     activity_form=ActivityForm()
     activities = Activity.objects.order_by('created_date')
@@ -172,8 +182,10 @@ def activity_update(request,activity_id):
             activity_form.instance.user=request.user
             activity_form.save()
             messages.add_message(request,messages.INFO,'Aktivite güncellendi.')
+            logger.info(activity.name+' adında Aktivite güncellendi.',extra={'user':request})
         else:
             messages.add_message(request,messages.INFO,'Aktivite güncellenirken hata oluştu.')
+            logger.error(activity.name+' adında Aktivite güncellenirken hata oluştu.',extra={'user':request.user})
         return redirect('activity_update',activity_id)
     
     activity_form=ActivityForm(instance=activity)
@@ -205,8 +217,10 @@ def task(request):
             task_form.instance.user=request.user
             task_form.save()
             messages.add_message(request,messages.INFO,'Görev eklendi.')
+            logger.info(task_form.instance.name+' adında Görev eklendi.',extra={'user':request.user})
         else:
             messages.add_message(request,messages.INFO,'Görev eklenirken hata oluştu.')
+            logger.error(task_form.instance.name+' adında Görev eklenirken hata oluştu.',extra={'user':request.user})
         return redirect('task')
     
     task_form=TaskForm()
@@ -227,8 +241,10 @@ def task_update(request,task_id):
             task_form.instance.user=request.user
             task_form.save()
             messages.add_message(request,messages.INFO,'Görev güncellendi.')
+            logger.info(task.name+' adında Görev güncellendi.',extra={'user':request.user})
         else:
             messages.add_message(request,messages.INFO,'Görev güncellenirken hata oluştu.')
+            logger.error(task.name+' adında Görev güncellenirken hata oluştu.',extra={'user':request.user})
         return redirect('task_update',task_id)
     
     task_form=TaskForm(instance=task)
@@ -245,6 +261,7 @@ def task_delete(request,task_id):
     if request.method=='POST':
         task.delete()
         messages.add_message(request,messages.INFO, task.name + ' silindi.')
+        logger.info(task.name+' adında Görev silindi.',extra={'user':request.user})
         return redirect('task')
     
     context={
