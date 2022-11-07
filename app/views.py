@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import Category, Process, Activity, Task
+from log.models import Log
 from .forms import CategoryForm, ProcessForm, ActivityForm, TaskForm
 import logging
 # Create your views here.
@@ -14,12 +15,14 @@ def index(request):
     process_count=Process.objects.count()
     activity_count=Activity.objects.count()
     task_count=Task.objects.count()
+    user_activities=Log.objects.all().filter(user=request.user)[:10]
 
     context={
         'category_count':category_count,
         'process_count':process_count,
         'activity_count':activity_count,
-        'task_count':task_count
+        'task_count':task_count,
+        'user_activities':user_activities
     }
     return render(request, 'app/index.html',context)
 

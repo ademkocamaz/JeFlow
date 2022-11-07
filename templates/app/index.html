@@ -86,12 +86,14 @@
         <div class="card text-bg-warning bg-gradient">
             <div class="card-header">
                 <h3 class="card-title">
-                    <i class="fa-solid fa-bullhorn"></i>
-                    Duyurular
+                    <i class="fa-solid fa-floppy-disk"></i>
+                    Hareketler
                 </h3>
             </div>
             <div class="card-body">
-                <p class="card-text"><i class="fa-solid fa-bullhorn"></i> demo yeni kategori ekledi</p>
+                {% for user_activity in user_activities %}
+                <p class="card-text"><i class="fa-solid fa-floppy-disk"></i> {{ user_activity.msg }}</p>
+                {% endfor %}
             </div>
         </div>
     </div>
