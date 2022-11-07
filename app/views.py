@@ -90,8 +90,10 @@ def category_delete(request,category_id):
 @login_required(login_url='/user/login/')
 def category_detail(request,category_id):
     category=get_object_or_404(Category,pk=category_id)
+    processes=Process.objects.all().filter(category=category)
     context={
-        'category':category
+        'category':category,
+        'processes':processes,
     }
     return render(request,'app/category_detail.html',context)
 
