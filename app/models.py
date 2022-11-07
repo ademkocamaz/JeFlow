@@ -22,6 +22,9 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name # + ' - ' + self.created_date.strftime("%d.%m.%Y, %H:%M:%S")
+    def process_count(self):
+        processes=Process.objects.all().filter(category=self)
+        return processes.count()
     
     class Meta:
         verbose_name='Kategori'
@@ -37,7 +40,7 @@ class Process(models.Model):
 
     def __str__(self):
         return self.name # + ' - ' + self.created_date.strftime("%d.%m.%Y, %H:%M:%S")
-    
+
     class Meta:
         verbose_name='İş Akışı'
         verbose_name_plural='İş Akışları'

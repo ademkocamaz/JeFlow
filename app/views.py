@@ -39,9 +39,10 @@ def category(request):
     
     category_form=CategoryForm()
     categories = Category.objects.order_by('created_date')
+    
     context = {
         'category_form':category_form,
-        'categories': categories
+        'categories': categories,
     }
     return render(request, 'app/category.html', context)
 
