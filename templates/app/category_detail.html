@@ -99,17 +99,17 @@
                             <td>{{ process.created_date }} | {{ process.created_date | timesince}} önce</td>
                             <td>{{ process.user }}</td>
                             <td>
-                                <a href="{% url 'process_detail' process.id %}" class="btn btn-dark bg-gradient">
+                                <a href="{% url 'process_detail' process.id %}" class="btn btn-dark bg-gradient" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-title="Detaylar"
+                                data-bs-content="Seçili satırdaki kaydın detaylarını görüntüler.">
                                     <i class="fa-solid fa-circle-info"></i>
-                                    Detaylar
                                 </a>
-                                <a class="btn btn-success bg-gradient" href="{% url 'process_update' process.id %}">
+                                <a class="btn btn-success bg-gradient" href="{% url 'process_update' process.id %}" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-title="Düzenle"
+                                data-bs-content="Seçili satırdaki kaydı düzenler.">
                                     <i class="fa-solid fa-pen-to-square"></i>
-                                    Düzenle
                                 </a>
-                                <a class="btn btn-danger bg-gradient" href="{% url 'process_delete' process.id %}">
+                                <a class="btn btn-danger bg-gradient" href="{% url 'process_delete' process.id %}" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-title="Sil"
+                                data-bs-content="Seçili satırdaki kaydı siler.">
                                     <i class="fa-solid fa-trash"></i>
-                                    Sil
                                 </a>
                             </td>
                         </tr>
