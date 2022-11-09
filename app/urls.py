@@ -10,10 +10,12 @@ urlpatterns=[
     path('category/<int:category_id>/delete', views.category_delete, name='category_delete'),
 
     path('process/', views.process, name='process'),
+    path('process/<int:process_id>/detail', views.process_detail, name='process_detail'),
     path('process/<int:process_id>/update', views.process_update, name='process_update'),
     path('process/<int:process_id>/delete', views.process_delete, name='process_delete'),
     
     path('activity/', views.activity, name='activity'),
+    path('activity/<int:activity_id>/detail', views.activity_detail, name='activity_detail'),
     path('activity/<int:activity_id>/update', views.activity_update, name='activity_update'),
     path('activity/<int:activity_id>/delete', views.activity_delete, name='activity_delete'),
     

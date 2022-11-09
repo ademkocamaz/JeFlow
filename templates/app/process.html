@@ -5,11 +5,11 @@
 {{ name }}
 {% load crispy_forms_tags %}
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="processModal" tabindex="-1" aria-labelledby="processModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Yeni İş Akışı</h1>
+                <h1 class="modal-title fs-5" id="processModalLabel">Yeni İş Akışı</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -29,10 +29,10 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">
+                <h3 id="title" class="card-title">
                     <i class="fa-solid fa-business-time"></i>
                     İş Akışları
-                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#processModal">
                         Yeni Ekle
                     </button>
                 </h3>
@@ -69,13 +69,20 @@
                             <td>{{ process.created_date }} | {{ process.created_date | timesince}} önce</td>
                             <td>{{ process.user }}</td>
                             <td>
-                                <a class="btn btn-success bg-gradient" href="{% url 'process_update' process.id %}">
-                                    <i class="fa-solid fa-pen-to-square"></i>
-                                    Düzenle
+                                <a href="{% url 'process_detail' process.id %}" class="btn btn-dark bg-gradient"
+                                    data-bs-toggle="popover" data-bs-trigger="hover" data-bs-title="Detaylar"
+                                    data-bs-content="Seçili satırdaki kaydın detaylarını görüntüler.">
+                                    <i class="fa-solid fa-circle-info"></i>
                                 </a>
-                                <a class="btn btn-danger bg-gradient" href="{% url 'process_delete' process.id %}">
+                                <a class="btn btn-success bg-gradient" href="{% url 'process_update' process.id %}"
+                                    data-bs-toggle="popover" data-bs-trigger="hover" data-bs-title="Düzenle"
+                                    data-bs-content="Seçili satırdaki kaydı düzenler.">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+                                <a class="btn btn-danger bg-gradient" href="{% url 'process_delete' process.id %}"
+                                    data-bs-toggle="popover" data-bs-trigger="hover" data-bs-title="Sil"
+                                    data-bs-content="Seçili satırdaki kaydı siler.">
                                     <i class="fa-solid fa-trash"></i>
-                                    Sil
                                 </a>
                             </td>
                         </tr>
@@ -94,7 +101,12 @@
 
 <script>
     $(document).ready(function () {
+        const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+        const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
         $('#process').DataTable({
+            responsive: true,
+            dom: 'Bflrtip',
+            buttons: true,
             language: {
                 url: 'https://cdn.datatables.net/plug-ins/1.12.1/i18n/tr.json'
             }

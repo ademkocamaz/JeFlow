@@ -5,11 +5,11 @@
 {{ name }}
 {% load crispy_forms_tags %}
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="activityModal" tabindex="-1" aria-labelledby="activityModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Yeni Aktivite</h1>
+                <h1 class="modal-title fs-5" id="activityModalLabel">Yeni Aktivite</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -28,13 +28,14 @@
 
 <div class="row mt-3">
     <div class="col-md-12">
-        
+
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">
                     <i class="fa-solid fa-microchip"></i>
                     Aktiviteler
-                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                        data-bs-target="#activityModal">
                         Yeni Ekle
                     </button>
                 </h3>
@@ -65,13 +66,20 @@
                             <td>{{ activity.created_date }} | {{ activity.created_date | timesince}} önce</td>
                             <td>{{ activity.user }}</td>
                             <td>
-                                <a class="btn btn-success bg-gradient" href="{% url 'activity_update' activity.id %}">
-                                    <i class="fa-solid fa-pen-to-square"></i>
-                                    Düzenle
+                                <a href="{% url 'activity_detail' activity.id %}" class="btn btn-dark bg-gradient"
+                                    data-bs-toggle="popover" data-bs-trigger="hover" data-bs-title="Detaylar"
+                                    data-bs-content="Seçili satırdaki kaydın detaylarını görüntüler.">
+                                    <i class="fa-solid fa-circle-info"></i>
                                 </a>
-                                <a class="btn btn-danger bg-gradient" href="{% url 'activity_delete' activity.id %}">
+                                <a class="btn btn-success bg-gradient" href="{% url 'activity_update' activity.id %}"
+                                    data-bs-toggle="popover" data-bs-trigger="hover" data-bs-title="Düzenle"
+                                    data-bs-content="Seçili satırdaki kaydı düzenler.">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+                                <a class="btn btn-danger bg-gradient" href="{% url 'activity_delete' activity.id %}"
+                                    data-bs-toggle="popover" data-bs-trigger="hover" data-bs-title="Sil"
+                                    data-bs-content="Seçili satırdaki kaydı siler.">
                                     <i class="fa-solid fa-trash"></i>
-                                    Sil
                                 </a>
                             </td>
                         </tr>
@@ -91,7 +99,12 @@
 
 <script>
     $(document).ready(function () {
+        const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+        const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
         $('#activity').DataTable({
+            responsive: true,
+            dom: 'Bflrtip',
+            buttons: true,
             language: {
                 url: 'https://cdn.datatables.net/plug-ins/1.12.1/i18n/tr.json'
             }

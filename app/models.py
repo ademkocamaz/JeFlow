@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class State(models.Model):
-    name=models.CharField(max_length=100,verbose_name='Durum')
+    name=models.CharField(max_length=100,verbose_name='Durum',default='Yeni')
 
     def __str__(self):
         return self.name
@@ -40,6 +40,13 @@ class Process(models.Model):
 
     def __str__(self):
         return self.name # + ' - ' + self.created_date.strftime("%d.%m.%Y, %H:%M:%S")
+
+    def activity_count(self):
+        activities=Activity.objects.all().filter(process=self)
+        return activities.count()
+    def task_count(self):
+        tasks=Task.objects.all().filter(process=self)
+        return tasks.count()
 
     class Meta:
         verbose_name='İş Akışı'

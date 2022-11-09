@@ -191,20 +191,20 @@ LOGGING = {
     #         '()': 'log.filters.UserFilter',
     #     },
     # },
-    'formatters': {
-        'verbose': {
-            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s %(user)s'
-        },
-        'simple': {
-            'format': '%(levelname)s %(asctime)s %(message)s %(user)s'
-        },
-    },
+    # 'formatters': {
+    #     'verbose': {
+    #         'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s %(user)s'
+    #     },
+    #     'simple': {
+    #         'format': '%(levelname)s %(asctime)s %(message)s %(user)s'
+    #     },
+    # },
     'handlers': {
         'db_log': {
             'level': 'INFO',
             'class': 'log.handler.DatabaseLogHandler',
             # 'filters': ['user'],
-            'formatter': 'verbose',
+            # 'formatter': 'verbose',
         },
     },
     'loggers': {

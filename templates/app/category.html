@@ -26,17 +26,24 @@
                     {% endif %}
                 </h6>
             </div>
+            <div class="card-footer">
+                <a href="{% url 'category_detail' category.id %}" class="btn btn-primary">
+                    Daha Fazla
+                    <i class="fa-solid fa-circle-arrow-right"></i>
+                </a>
+
+            </div>
         </div>
     </div>
     {% endfor %}
 </div>
 {% endif %}
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="categoryModal" tabindex="-1" aria-labelledby="categoryModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Yeni Kategori</h1>
+                <h1 class="modal-title fs-5" id="categoryModalLabel">Yeni Kategori</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -60,7 +67,8 @@
                 <h3 class="card-title">
                     <i class="fa-solid fa-list"></i>
                     Kategoriler
-                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                        data-bs-target="#categoryModal">
                         Yeni Ekle
                     </button>
                 </h3>
@@ -87,13 +95,15 @@
                             <td>{{ category.created_date }} | {{ category.created_date | timesince}} önce</td>
                             <td>{{ category.user }}</td>
                             <td>
-                                <a class="btn btn-success bg-gradient" href="{% url 'category_update' category.id %}">
+                                <a class="btn btn-success bg-gradient" href="{% url 'category_update' category.id %}"
+                                    data-bs-toggle="popover" data-bs-trigger="hover" data-bs-title="Düzenle"
+                                    data-bs-content="Seçili satırdaki kaydı düzenler.">
                                     <i class="fa-solid fa-pen-to-square"></i>
-                                    Düzenle
                                 </a>
-                                <a class="btn btn-danger bg-gradient" href="{% url 'category_delete' category.id %}">
+                                <a class="btn btn-danger bg-gradient" href="{% url 'category_delete' category.id %}"
+                                    data-bs-toggle="popover" data-bs-trigger="hover" data-bs-title="Sil"
+                                    data-bs-content="Seçili satırdaki kaydı siler.">
                                     <i class="fa-solid fa-trash"></i>
-                                    Sil
                                 </a>
                             </td>
                         </tr>
@@ -111,8 +121,14 @@
 </div>
 
 <script>
+
     $(document).ready(function () {
+        const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+        const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
         $('#category').DataTable({
+            responsive: true,
+            dom: 'Bflrtip',
+            buttons: true,
             language: {
                 url: 'https://cdn.datatables.net/plug-ins/1.12.1/i18n/tr.json'
             }

@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+{% load humanize %}
+
+{% block content %}
+{{ name }}
+
+<div class="row mt-3">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">
+                    <i class="fa-solid fa-microchip"></i>
+                    {{ activity.name }}
+                </h3>
+            </div>
+            <div class="card-body">
+                <h5 class="card-text">
+                    {% if activity.description %}
+                    Açıklama : {{ activity.description }}
+                    {% else %}
+                    Açıklama : Bulunamadı.
+                    {% endif %}
+                </h5>
+                <h5 class="card-text">
+                    İş Akış Adı : {{ activity.process.name }}
+                </h5>
+                <h5 class="card-text">
+                    {% if activity.observation %}
+                    Gözlem : {{ activity.observation }}
+                    {% else %}
+                    Gözlem : Bulunamadı.
+                    {% endif %}
+                </h5>
+
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

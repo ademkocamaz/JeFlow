@@ -1,0 +1,205 @@
+{% extends 'layout.html' %}
+{% load humanize %}
+
+{% block content %}
+{{ name }}
+{% load crispy_forms_tags %}
+
+<div class="row mt-3">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">
+                    <i class="fa-solid fa-business-time"></i>
+                    {{ process.name }}
+                </h3>
+            </div>
+            <div class="card-body">
+                <h5 class="card-text">
+                    {% if process.description %}
+                    Açıklama : {{ process.description }}
+                    {% else %}
+                    Açıklama : Bulunamadı.
+                    {% endif %}
+                </h5>
+                <h5 class="card-text">
+                    {% if process.activity_count > 0 %}
+                    Aktivite : {{ process.activity_count }} Adet
+                    {% else %}
+                    Aktivite : Yok
+                    {% endif %}
+                </h5>
+                <h5 class="card-text">
+                    {% if process.task_count > 0 %}
+                    Görev : {{ process.task_count }} Adet
+                    {% else %}
+                    Görev : Yok
+                    {% endif %}
+                </h5>
+                <h5 class="card-text">
+                    Durumu : {{ process.state }}
+                </h5>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-3">
+    <div class="col-md-12">
+        
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">
+                    <i class="fa-solid fa-microchip"></i>
+                    Aktiviteler
+                </h3>
+            </div>
+            <div class="card-body">
+                {% if activities %}
+                <table id="activity" class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">İş Adı</th>
+                            <th scope="col">Aktivite Adı</th>
+                            <th scope="col">Aktivite Açıklaması</th>
+                            <th scope="col">Gözlem</th>
+                            <th scope="col">Oluşturulma Tarihi</th>
+                            <th scope="col">Düzenleyen</th>
+                            <th scope="col">İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for activity in activities %}
+                        <tr>
+                            <th scope="row">{{ activity.id }}</th>
+                            <td>{{ activity.process }}</td>
+                            <td>{{ activity.name }}</td>
+                            <td>{{ activity.description }}</td>
+                            <td>{{ activity.observation }}</td>
+                            <td>{{ activity.created_date }} | {{ activity.created_date | timesince}} önce</td>
+                            <td>{{ activity.user }}</td>
+                            <td>
+                                <a class="btn btn-success bg-gradient" href="{% url 'activity_update' activity.id %}">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                    Düzenle
+                                </a>
+                                <a class="btn btn-danger bg-gradient" href="{% url 'activity_delete' activity.id %}">
+                                    <i class="fa-solid fa-trash"></i>
+                                    Sil
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                {% else %}
+                <div class="alert alert-warning">
+                    <p>Aktivite bulunamadı.</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-3">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">
+                    <i class="fa-solid fa-list-check"></i>
+                    Görevler
+                </h3>
+            </div>
+            <div class="card-body">
+                {% if tasks %}
+                <table id="task" class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">İş Adı</th>
+                            <th scope="col">Görev Adı</th>
+                            <th scope="col">Görev Açıklaması</th>
+                            <th scope="col">Görev Durumu</th>
+                            <th scope="col">Oluşturulma Tarihi</th>
+                            <th scope="col">Atanan Personel</th>
+                            <th scope="col">Düzenleyen</th>
+                            <th scope="col">İşlemler</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for task in tasks %}
+                        <tr>
+                            <th scope="row">{{ task.id }}</th>
+                            <td>{{ task.process }}</td>
+                            <td>{{ task.name }}</td>
+                            <td>{{ task.description }}</td>
+                            <td>
+                                {% if task.state is not None %}
+                                {{task.state}}
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td>{{ task.created_date }} | {{ task.created_date | timesince}} önce</td>
+                            <td>
+                                {% if task.assigned_user is not None%}
+                                {{ task.assigned_user }}
+                                {% else %}
+                                Atanmamış
+                                {% endif %}
+                            </td>
+                            <td>{{ task.user }}</td>
+                            <td>
+                                <a class="btn btn-success bg-gradient" href="{% url 'task_update' task.id %}">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                    Düzenle
+                                </a>
+                                <a class="btn btn-danger bg-gradient" href="{% url 'task_delete' task.id %}">
+                                    <i class="fa-solid fa-trash"></i>
+                                    Sil
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                {% else %}
+                <div class="alert alert-warning">
+                    <p>Görev bulunamadı.</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $('#activity').DataTable({
+            responsive: true,
+            dom: 'Bflrtip',
+            buttons: true,
+            language: {
+                url: 'https://cdn.datatables.net/plug-ins/1.12.1/i18n/tr.json'
+            }
+        });
+    });
+    $(document).ready(function () {
+        $('#task').DataTable({
+            responsive: true,
+            dom: 'Bflrtip',
+            buttons: true,
+            language: {
+                url: 'https://cdn.datatables.net/plug-ins/1.12.1/i18n/tr.json'
+            }
+        });
+    });
+</script>
+
+{% endblock %}

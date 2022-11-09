@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import Category, Process, Activity, Task
+from .models import Category, Process, Activity, Task, State
 from log.models import Log
 from .forms import CategoryForm, ProcessForm, ActivityForm, TaskForm
 import logging
@@ -91,9 +91,24 @@ def category_delete(request,category_id):
 def category_detail(request,category_id):
     category=get_object_or_404(Category,pk=category_id)
     processes=Process.objects.all().filter(category=category)
+
+    if request.method=='POST':
+        process_form=ProcessForm(request.POST)
+        if process_form.is_valid():
+            process_form.instance.user=request.user
+            process_form.save()
+            messages.add_message(request,messages.INFO,'İş akışı eklendi.')
+            logger.info(process_form.instance.name+' adında İş Akışı eklendi.',extra={'user':request.user})
+        else:
+            messages.add_message(request,messages.INFO,'İş akışı eklenirken hata oluştu.')
+            logger.error(process_form.instance.name+' adında İş Akışı eklenirken hata oluştu.',extra={'user':request.user})
+        return redirect('category_detail',category.id)
+    state=get_object_or_404(State,name='Yeni')
+    process_form=ProcessForm(initial={'category':category,'state':state})
     context={
         'category':category,
         'processes':processes,
+        'process_form':process_form,
     }
     return render(request,'app/category_detail.html',context)
 
@@ -111,7 +126,8 @@ def process(request):
             logger.error(process_form.instance.name+' adında İş Akışı eklenirken hata oluştu.',extra={'user':request.user})
         return redirect('process')
 
-    process_form=ProcessForm()
+    state=get_object_or_404(State,name='Yeni')
+    process_form=ProcessForm(initial={'state':state})
     processes = Process.objects.order_by('created_date')
     context = {
         'process_form':process_form,
@@ -156,6 +172,19 @@ def process_delete(request,process_id):
         'process':process
     }
     return render(request,'app/process_delete.html',context)
+
+@login_required(login_url='/user/login/')
+def process_detail(request,process_id):
+    process=get_object_or_404(Process,pk=process_id)
+    activities=Activity.objects.all().filter(process=process)
+    tasks=Task.objects.all().filter(process=process)
+
+    context={
+        'process':process,
+        'activities':activities,
+        'tasks':tasks,
+    }
+    return render(request,'app/process_detail.html',context)
 
 @login_required(login_url='/user/login/')
 def activity(request):
@@ -216,6 +245,15 @@ def activity_delete(request,activity_id):
     return render(request,'app/activity_delete.html',context)
 
 @login_required(login_url='/user/login/')
+def activity_detail(request,activity_id):
+    activity=get_object_or_404(Activity,pk=activity_id)
+
+    context={
+        'activity':activity,
+    }
+    return render(request,'app/activity_detail.html',context)
+
+@login_required(login_url='/user/login/')
 def task(request):
     if request.method=='POST':
         task_form=TaskForm(request.POST)
@@ -228,8 +266,8 @@ def task(request):
             messages.add_message(request,messages.INFO,'Görev eklenirken hata oluştu.')
             logger.error(task_form.instance.name+' adında Görev eklenirken hata oluştu.',extra={'user':request.user})
         return redirect('task')
-    
-    task_form=TaskForm()
+    state=get_object_or_404(State,name='Yeni')
+    task_form=TaskForm(initial={'state':state})
     tasks = Task.objects.order_by('created_date')
     context = {
         'task_form':task_form,

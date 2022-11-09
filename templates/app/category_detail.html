@@ -3,7 +3,140 @@
 
 {% block content %}
 {{ name }}
+{% load crispy_forms_tags %}
 
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Yeni İş Akışı</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{% url 'category_detail' category.id %}" method="POST">
+                    {% csrf_token %}
+                    {{process_form|crispy}}
+                    <button class="btn btn-dark my-4" type="submit">Ekle</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">İptal</button>
+            </div>
+        </div>
+    </div>
+</div>
 
+<div class="row mt-3">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">
+                    <i class="fa-solid fa-list"></i>
+                    {{ category.name }}
+                </h3>
+            </div>
+            <div class="card-body">
+                <h5 class="card-text">
+                    {% if category.description %}
+                    {{ category.description }}
+                    {% else %}
+                    Açıklama bulunamadı.
+                    {% endif %}
+                </h5>
+                <h5 class="card-text">
+                    {% if category.process_count > 0 %}
+                    {{ category.process_count }} Adet İş Akışı var.
+                    {% else %}
+                    İş Akışı Yok
+                    {% endif %}
+                </h5>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-3">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">
+                    <i class="fa-solid fa-business-time"></i>
+                    İş Akışları
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Yeni Ekle
+                    </button>
+                </h3>
+            </div>
+            <div class="card-body">
+                {% if processes %}
+                <table id="process" class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Kategori</th>
+                            <th scope="col">İş Adı</th>
+                            <th scope="col">İş Açıklaması</th>
+                            <th scope="col">İş Durumu</th>
+                            <th scope="col">Oluşturulma Tarihi</th>
+                            <th scope="col">Düzenleyen</th>
+                            <th scope="col">İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for process in processes %}
+                        <tr>
+                            <th scope="row">{{ process.id }}</th>
+                            <td>{{ process.category }}</td>
+                            <td>{{ process.name }}</td>
+                            <td>{{ process.description }}</td>
+                            <td>
+                                {% if process.state is not None %}
+                                {{ process.state }}
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td>{{ process.created_date }} | {{ process.created_date | timesince}} önce</td>
+                            <td>{{ process.user }}</td>
+                            <td>
+                                <a href="{% url 'process_detail' process.id %}" class="btn btn-dark bg-gradient">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                    Detaylar
+                                </a>
+                                <a class="btn btn-success bg-gradient" href="{% url 'process_update' process.id %}">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                    Düzenle
+                                </a>
+                                <a class="btn btn-danger bg-gradient" href="{% url 'process_delete' process.id %}">
+                                    <i class="fa-solid fa-trash"></i>
+                                    Sil
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <div class="alert alert-warning">
+                    <p>İş Akışı bulunamadı.</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#process').DataTable({
+            responsive: true,
+            dom: 'Bflrtip',
+            buttons: true,
+            language: {
+                url: 'https://cdn.datatables.net/plug-ins/1.12.1/i18n/tr.json'
+            }
+        });
+    });
+</script>
 
 {% endblock %}
