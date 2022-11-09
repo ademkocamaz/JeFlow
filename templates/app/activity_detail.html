@@ -14,25 +14,41 @@
                 </h3>
             </div>
             <div class="card-body">
-                <h5 class="card-text">
-                    {% if activity.description %}
-                    Açıklama : {{ activity.description }}
-                    {% else %}
-                    Açıklama : Bulunamadı.
-                    {% endif %}
-                </h5>
-                <h5 class="card-text">
-                    İş Akış Adı : {{ activity.process.name }}
-                </h5>
-                <h5 class="card-text">
-                    {% if activity.observation %}
-                    Gözlem : {{ activity.observation }}
-                    {% else %}
-                    Gözlem : Bulunamadı.
-                    {% endif %}
-                </h5>
+                <div class="card">
+                    <div class="card-header">
+                        <h6 class="card-title">Açıklama</h6>
+                    </div>
+                    <div class="card-body">
+                        {% if activity.description %}
+                        {{ activity.description }}
+                        {% else %}
+                        Bulunamadı.
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h6 class="card-title">İş Akış Adı</h6>
+                    </div>
+                    <div class="card-body">
+                        {{ activity.process.name }}
+                    </div>
 
-                
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h6 class="card-title">Gözlem</h6>
+                    </div>
+                    <div class="card-body">
+                        {% if activity.observation %}
+                        {{ activity.observation }}
+                        {% else %}
+                        Bulunamadı.
+                        {% endif %}
+                    </div>
+                </div>
+
+
             </div>
         </div>
     </div>
