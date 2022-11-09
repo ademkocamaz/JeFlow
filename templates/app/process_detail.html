@@ -15,30 +15,54 @@
                 </h3>
             </div>
             <div class="card-body">
-                <h5 class="card-text">
-                    {% if process.description %}
-                    Açıklama : {{ process.description }}
-                    {% else %}
-                    Açıklama : Bulunamadı.
-                    {% endif %}
-                </h5>
-                <h5 class="card-text">
-                    {% if process.activity_count > 0 %}
-                    Aktivite : {{ process.activity_count }} Adet
-                    {% else %}
-                    Aktivite : Yok
-                    {% endif %}
-                </h5>
-                <h5 class="card-text">
-                    {% if process.task_count > 0 %}
-                    Görev : {{ process.task_count }} Adet
-                    {% else %}
-                    Görev : Yok
-                    {% endif %}
-                </h5>
-                <h5 class="card-text">
-                    Durumu : {{ process.state }}
-                </h5>
+                <div class="card">
+                    <div class="card-header">
+                        <h6 class="card-title">Açıklama</h6>
+                    </div>
+                    <div class="card-body">
+                        {% if process.description %}
+                        {{ process.description }}
+                        {% else %}
+                        Bulunamadı.
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h6 class="card-title">Aktivite</h6>
+                        </h6>
+                    </div>
+                    <div class="card-body">
+                        {% if process.activity_count > 0 %}
+                        {{ process.activity_count }} Adet.
+                        {% else %}
+                        Bulunamadı.
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h6 class="card-title">Görev</h6>
+                    </div>
+                    <div class="card-body">
+                        {% if process.task_count > 0 %}
+                        {{ process.task_count }} Adet.
+                        {% else %}
+                        Bulunamadı.
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h6 class="card-title">Durumu</h6>
+                    </div>
+                    <div class="card-body">
+                        {{ process.state }}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -89,7 +113,6 @@
                                     data-bs-toggle="popover" data-bs-trigger="hover" data-bs-title="Sil"
                                     data-bs-content="Seçili satırdaki kaydı siler.">
                                     <i class="fa-solid fa-trash"></i>
-                                    Sil
                                 </a>
                             </td>
                         </tr>
