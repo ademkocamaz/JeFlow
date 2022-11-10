@@ -11,6 +11,10 @@
     z-index: 9999;
 }
 
+img.logo{
+    height: 50px;
+}
+
 .shake {
     animation: shake 0.5s;
     animation-iteration-count: infinite;
