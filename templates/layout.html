@@ -7,11 +7,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>JeFlow</title>
   <link rel="stylesheet" href="{% static 'css/jeflow.css' %}">
+
+  <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <!-- Fontawesome -->
   <script src="https://kit.fontawesome.com/14d64e4005.js" crossorigin="anonymous"></script>
+  <!-- jQuery -->
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
 
+  <!-- Select2 -->
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+  <!-- Data Tables -->
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
   <link rel="stylesheet" type="text/css"
     href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.dataTables.min.css">
@@ -20,7 +29,6 @@
     src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
   <script type="text/javascript" charset="utf8"
     src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
-
   <script type="text/javascript" charset="utf8"
     src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
   <script type="text/javascript" charset="utf8"
@@ -81,6 +89,9 @@
               </form>
             </li>
             <li class="nav-item">
+              <a href="{% url 'settings' %}" class="nav-link">Ayarlar</a>
+            </li>
+            <li class="nav-item">
               <a href="#" class="nav-link">{{ user }}</a>
             </li>
             {% else %}
@@ -139,7 +150,6 @@
     crossorigin="anonymous"></script>
   <script src="https://momentjs.com/downloads/moment-with-locales.js"></script>
   <script src="{% static 'js/jeflow.js' %}"></script>
-
   <script>
     setTimeout(function () {
       $('.preloader').css('height', 0);
@@ -148,6 +158,13 @@
       }, 200);
     }, 500);
     $(document).ready(function () {
+
+      $('select').select2({
+        placeholder: '---------',
+        width: '100%',
+        dropdownParent: $('.modal .modal-content')
+      });
+
       var interval = setInterval(function () {
 
         var momentNow = moment();
