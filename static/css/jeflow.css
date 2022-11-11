@@ -17,7 +17,7 @@ img.logo{
 
 .shake {
     animation: shake 0.5s;
-    animation-iteration-count: infinite;
+    animation-iteration-count: 1500ms;
 }
 
 @keyframes shake {
