@@ -26,6 +26,9 @@ def index(request):
     }
     return render(request, 'app/index.html',context)
 
+def settings(request):
+    return render(request,'app/settings.html')
+
 @login_required(login_url='/user/login/')
 def category(request):
     if request.method=='POST':
