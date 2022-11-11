@@ -88,8 +88,15 @@
                 <!-- <li><hr class="dropdown-divider"></li> -->
               </ul>
             </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">{{ user }}</a>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="{% url 'profile' %}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                {{ user }}
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{% url 'profile' %}">Profil</a></li>
+                <li><a class="dropdown-item" href="{% url 'reset_password' %}">Şifre Yenile</a></li>
+                <!-- <li><hr class="dropdown-divider"></li> -->
+              </ul>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="javascript:{document.getElementById('logout').submit()}">Çıkış</a>

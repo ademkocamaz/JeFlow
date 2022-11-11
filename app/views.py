@@ -48,6 +48,8 @@ def category(request):
         else:
             messages.add_message(request,messages.ERROR,'Kategori eklenirken hata oluştu.')
             logger.error(category_form.instance.name+' adında Kategori eklenirken hata oluştu.', extra={'user':request.user})
+            for error in list(category_form.errors.values()):
+                messages.add_message(request,messages.ERROR,error)
         return redirect('category')
     
     category_form=CategoryForm()
@@ -73,6 +75,8 @@ def category_update(request,category_id):
         else:
             messages.add_message(request,messages.INFO,'Kategori güncellenirken bir hata oluştu.')
             logger.error(category.name+' adında kategori güncellenirken bir hata oluştu.',extra={'user':request.user})
+            for error in list(category_form.errors.values()):
+                messages.add_message(request,messages.ERROR,error)
         return redirect('category_update',category.id)
 
     category_form=CategoryForm(instance=category)
@@ -112,6 +116,8 @@ def category_detail(request,category_id):
         else:
             messages.add_message(request,messages.INFO,'İş akışı eklenirken hata oluştu.')
             logger.error(process_form.instance.name+' adında İş Akışı eklenirken hata oluştu.',extra={'user':request.user})
+            for error in list(process_form.errors.values()):
+                messages.add_message(request,messages.ERROR,error)
         return redirect('category_detail',category.id)
     state=get_object_or_404(State,name='Yeni')
     process_form=ProcessForm(initial={'category':category,'state':state})
@@ -134,6 +140,8 @@ def process(request):
         else:
             messages.add_message(request,messages.INFO,'İş akışı eklenirken hata oluştu.')
             logger.error(process_form.instance.name+' adında İş Akışı eklenirken hata oluştu.',extra={'user':request.user})
+            for error in list(process_form.errors.values()):
+                messages.add_message(request,messages.ERROR,error)
         return redirect('process')
 
     state=get_object_or_404(State,name='Yeni')
@@ -159,6 +167,8 @@ def process_update(request,process_id):
         else:
             messages.add_message(request,messages.INFO,'İş akışı güncellenirken hata oluştu.')
             logger.error(process.name+' adında İş Akışı güncellenirken hata oluştu.',extra={'user':request.user})
+            for error in list(process_form.errors.values()):
+                messages.add_message(request,messages.ERROR,error)
         return redirect('process_update',process_id)
     
     process_form=ProcessForm(instance=process)
@@ -208,6 +218,8 @@ def activity(request):
         else:
             messages.add_message(request,messages.INFO,'Aktivite eklenirken hata oluştu.')
             logger.error(activity_form.instance.name+' adında Aktivite eklenirken hata oluştu.',extra={'user':request.user})
+            for error in list(activity_form.errors.values()):
+                messages.add_message(request,messages.ERROR,error)
         return redirect('activity')
     activity_form=ActivityForm()
     activities = Activity.objects.order_by('created_date')
@@ -231,6 +243,8 @@ def activity_update(request,activity_id):
         else:
             messages.add_message(request,messages.INFO,'Aktivite güncellenirken hata oluştu.')
             logger.error(activity.name+' adında Aktivite güncellenirken hata oluştu.',extra={'user':request.user})
+            for error in list(activity_form.errors.values()):
+                messages.add_message(request,messages.ERROR,error)
         return redirect('activity_update',activity_id)
     
     activity_form=ActivityForm(instance=activity)
@@ -275,6 +289,8 @@ def task(request):
         else:
             messages.add_message(request,messages.INFO,'Görev eklenirken hata oluştu.')
             logger.error(task_form.instance.name+' adında Görev eklenirken hata oluştu.',extra={'user':request.user})
+            for error in list(task_form.errors.values()):
+                messages.add_message(request,messages.ERROR,error)
         return redirect('task')
     state=get_object_or_404(State,name='Yeni')
     task_form=TaskForm(initial={'state':state})
@@ -299,6 +315,8 @@ def task_update(request,task_id):
         else:
             messages.add_message(request,messages.INFO,'Görev güncellenirken hata oluştu.')
             logger.error(task.name+' adında Görev güncellenirken hata oluştu.',extra={'user':request.user})
+            for error in list(task_form.errors.values()):
+                messages.add_message(request,messages.ERROR,error)
         return redirect('task_update',task_id)
     
     task_form=TaskForm(instance=task)
@@ -335,6 +353,8 @@ def state(request):
         else:
             messages.add_message(request,messages.INFO,'Durum eklenirken hata oluştu.')
             logger.error(state_form.instance.name+' adında Durum eklenirken hata oluştu.',extra={'user':request.user})
+            for error in list(state_form.errors.values()):
+                messages.add_message(request,messages.ERROR,error)
         return redirect('state')
     state_form=StateForm()
     states = State.objects.order_by('created_date')
@@ -358,6 +378,8 @@ def state_update(request,state_id):
         else:
             messages.add_message(request,messages.INFO,'Durum güncellenirken hata oluştu.')
             logger.error(state.name+' adında Durum güncellenirken hata oluştu.',extra={'user':request.user})
+            for error in list(state_form.errors.values()):
+                messages.add_message(request,messages.ERROR,error)
         return redirect('state_update',state_id)
     
     state_form=StateForm(instance=state)

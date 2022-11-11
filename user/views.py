@@ -1,13 +1,15 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from django.contrib import auth
 from django.contrib import messages
+from .forms import ProfileForm, ResetPasswordForm
 import logging
 # Create your views here.
 logger=logging.getLogger('db')
 
 def login(request):
-    messages.add_message(request,messages.INFO,'demo / demo ile giriş yapabilirsiniz')
+    messages.add_message(request,messages.INFO,'Kullanıcı Adı: demo Şifre: demo ile giriş yapabilirsiniz')
     if request.method=='POST':
         username=request.POST['username']
         password=request.POST['password']
@@ -61,3 +63,40 @@ def logout(request):
         messages.add_message(request,messages.SUCCESS,'Oturumunuz kapatıldı.')
         logger.info(username + ' oturumu kapatıldı.')
     return redirect('index')
+
+@login_required(login_url='/user/login/')
+def profile(request):
+    if request.method=='POST':
+        profile_form=ProfileForm(request.POST,instance=request.user)
+        if profile_form.is_valid():
+            profile_form.save()
+            messages.add_message(request,messages.INFO,'Kullanıcı bilgileri güncellendi.')
+            logger.info(request.user.username+' adında kullanıcı bilgileri güncellendi.',extra={'user':request.user})
+        else:
+            messages.add_message(request,messages.INFO,'Kullanıcı bilgileri güncellenirken bir hata oluştu.')
+            logger.error(request.user.username+' adında kullanıcı bilgileri güncellenirken bir hata oluştu.',extra={'user':request.user})
+
+    profile_form=ProfileForm(instance=request.user)
+    context={
+        'profile_form':profile_form,
+    }
+    return render(request,'user/profile.html',context)
+
+@login_required(login_url='/user/login/')
+def reset_password(request):
+    if request.method=='POST':
+        reset_password_form=ResetPasswordForm(request.user,request.POST)
+        if reset_password_form.is_valid():
+            reset_password_form.save()
+            messages.add_message(request,messages.INFO,'Şifreniz başarıyla değiştirildi.')
+            logger.info(request.user.username+' şifre değiştirildi',extra={'user':request.user})
+        else:
+            messages.add_message(request,messages.ERROR,'Şifreniz değiştirilirken hata oluştu.')
+            logger.error(request.user.username+' şifre değiştirilirken hata oluştu.',extra={'user':request.user})
+            for error in list(reset_password_form.errors.values()):
+                messages.add_message(request,messages.ERROR,error)
+    reset_password_form=ResetPasswordForm(request.user)
+    context={
+        'reset_password_form':reset_password_form
+    }
+    return render(request,'user/reset_password.html',context)
