@@ -83,17 +83,7 @@
               <a class="nav-link" href="{% url 'task' %}">Görevler</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="javascript:{document.getElementById('logout').submit()}">Çıkış</a>
-              <form id="logout" action="{% url 'logout' %}" method="POST">
-                {% csrf_token %}
-                <input type="hidden">
-              </form>
-            </li>
-            <li class="nav-item">
               <a href="{% url 'settings' %}" class="nav-link">Ayarlar</a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">{{ user }}</a>
             </li>
             {% else %}
             <li class="nav-item">
@@ -102,7 +92,22 @@
             {% endif %}
           </ul>
         </div>
-
+        {% if user.is_authenticated %}
+        <div class="d-flex justify-content-end">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a href="#" class="nav-link">{{ user }}</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="javascript:{document.getElementById('logout').submit()}">Çıkış</a>
+              <form id="logout" action="{% url 'logout' %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden">
+              </form>
+            </li>
+          </ul>
+        </div>
+        {% endif %}
       </div>
     </nav>
   </header>
