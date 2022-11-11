@@ -6,6 +6,9 @@ from django.contrib.auth.models import User
 
 class State(models.Model):
     name=models.CharField(max_length=100,verbose_name='Durum')
+    description=models.TextField(verbose_name='Açıklama', blank=True, null=True)
+    created_date=models.DateTimeField(auto_now_add=True, verbose_name='Oluşturulma Tarihi', blank=True, null=True)
+    user=models.ForeignKey(User,on_delete=models.PROTECT,verbose_name='Kullanıcı', blank=True, null=True)
 
     def __str__(self):
         return self.name

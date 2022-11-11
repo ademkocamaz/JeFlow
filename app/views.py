@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import Category, Process, Activity, Task, State
 from log.models import Log
-from .forms import CategoryForm, ProcessForm, ActivityForm, TaskForm
+from .forms import CategoryForm, ProcessForm, ActivityForm, TaskForm, StateForm
 import logging
 # Create your views here.
 
@@ -26,8 +26,15 @@ def index(request):
     }
     return render(request, 'app/index.html',context)
 
+@login_required(login_url='/user/login/')
 def settings(request):
-    return render(request,'app/settings.html')
+    state_form=StateForm()
+    states=State.objects.order_by('created_date')
+    context={
+        'state_form':state_form,
+        'states':states,
+    }
+    return render(request,'app/settings.html',context)
 
 @login_required(login_url='/user/login/')
 def category(request):
@@ -315,3 +322,62 @@ def task_delete(request,task_id):
         'task':task
     }
     return render(request,'app/task_delete.html',context)
+
+@login_required(login_url='/user/login/')
+def state(request):
+    if request.method=='POST':
+        state_form=StateForm(request.POST)
+        if state_form.is_valid():
+            state_form.instance.user=request.user
+            state_form.save()
+            messages.add_message(request,messages.INFO,'Durum eklendi.')
+            logger.info(state_form.instance.name+' adında Durum eklendi.',extra={'user':request.user})
+        else:
+            messages.add_message(request,messages.INFO,'Durum eklenirken hata oluştu.')
+            logger.error(state_form.instance.name+' adında Durum eklenirken hata oluştu.',extra={'user':request.user})
+        return redirect('state')
+    state_form=StateForm()
+    states = State.objects.order_by('created_date')
+    context = {
+        'state_form':state_form,
+        'states': states
+    }
+    return render(request, 'app/state.html', context)
+
+@login_required(login_url='/user/login/')
+def state_update(request,state_id):
+    state=get_object_or_404(State,pk=state_id)
+
+    if request.method=='POST':
+        state_form=StateForm(request.POST,instance=state)
+        if state_form.is_valid():
+            state_form.instance.user=request.user
+            state_form.save()
+            messages.add_message(request,messages.INFO,'Durum güncellendi.')
+            logger.info(state.name+' adında Durum güncellendi.',extra={'user':request.user})
+        else:
+            messages.add_message(request,messages.INFO,'Durum güncellenirken hata oluştu.')
+            logger.error(state.name+' adında Durum güncellenirken hata oluştu.',extra={'user':request.user})
+        return redirect('state_update',state_id)
+    
+    state_form=StateForm(instance=state)
+    context={
+        'state_form':state_form,
+        'state':state
+    }
+    return render(request,'app/state_update.html',context)
+
+@login_required(login_url='/user/login/')
+def state_delete(request,state_id):
+    state=get_object_or_404(State,pk=state_id)
+
+    if request.method=='POST':
+        state.delete()
+        messages.add_message(request,messages.INFO, state.name + ' silindi.')
+        logger.info(state.name+' adında Durum silindi.',extra={'user':request.user})
+        return redirect('state')
+    
+    context={
+        'state':state
+    }
+    return render(request,'app/state_delete.html',context)

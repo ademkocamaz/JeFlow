@@ -1,0 +1,89 @@
+{% extends 'layout.html' %}
+{% load humanize %}
+
+{% block content %}
+{{ name }}
+{% load crispy_forms_tags %}
+
+<div class="modal fade" id="stateModal" tabindex="-1" aria-labelledby="stateModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="stateModalLabel">Yeni Durum</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{% url 'state' %}" method="POST">
+                    {% csrf_token %}
+                    {{state_form|crispy}}
+                    <button class="btn btn-dark my-4" type="submit">Ekle</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">İptal</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-3">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">
+                    <i class="fa-solid fa-list"></i>
+                    Durumlar
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                        data-bs-target="#stateModal">
+                        Yeni Ekle
+                    </button>
+                </h3>
+            </div>
+            <div class="card-body">
+                {% if states %}
+                <table id="state" class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Durum Adı</th>
+                            <th scope="col">Durum Açıklaması</th>
+                            <th scope="col">Oluşturulma Tarihi</th>
+                            <th scope="col">Düzenleyen</th>
+                            <th scope="col">İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for state in states %}
+                        <tr>
+                            <th scope="row">{{ state.id }}</th>
+                            <td>{{ state.name }}</td>
+                            <td>{{ state.description }}</td>
+                            <td>{{ state.created_date }} | {{ state.created_date | timesince}} önce</td>
+                            <td>{{ state.user }}</td>
+                            <td>
+                                <a class="btn btn-success bg-gradient" href="{% url 'state_update' state.id %}"
+                                    data-bs-toggle="popover" data-bs-trigger="hover" data-bs-title="Düzenle"
+                                    data-bs-content="Seçili satırdaki kaydı düzenler.">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+                                <a class="btn btn-danger bg-gradient" href="{% url 'state_delete' state.id %}"
+                                    data-bs-toggle="popover" data-bs-trigger="hover" data-bs-title="Sil"
+                                    data-bs-content="Seçili satırdaki kaydı siler.">
+                                    <i class="fa-solid fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <div class="alert alert-warning">
+                    <p>Durum bulunamadı.</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

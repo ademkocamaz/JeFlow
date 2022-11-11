@@ -1,6 +1,6 @@
 from dataclasses import fields
 from django import forms
-from .models import Activity, Category,Process,Task
+from .models import Activity, Category,Process,Task, State
 
 # Create your forms here.
 
@@ -23,3 +23,8 @@ class TaskForm(forms.ModelForm):
     class Meta:
         model=Task
         fields=('process','name','description','assigned_user','state')
+
+class StateForm(forms.ModelForm):
+    class Meta:
+        model=State
+        fields=('name', 'description')

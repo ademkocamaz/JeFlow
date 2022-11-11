@@ -63,29 +63,35 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav">
-            <li class="nav-item btn btn-light">
+            <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Anasayfa</a>
             </li>
             {% if user.is_authenticated %}
-            <li class="nav-item btn btn-light">
+            <li class="nav-item">
               <a class="nav-link" href="{% url 'category' %}">Kategoriler</a>
             </li>
-            <li class="nav-item btn btn-light">
+            <li class="nav-item">
               <a class="nav-link" href="{% url 'process' %}">İş Akışları</a>
             </li>
-            <li class="nav-item btn btn-light">
+            <li class="nav-item">
               <a class="nav-link" href="{% url 'activity' %}">Aktiviteler</a>
             </li>
-            <li class="nav-item btn btn-light">
+            <li class="nav-item">
               <a class="nav-link" href="{% url 'task' %}">Görevler</a>
             </li>
-            <li class="nav-item btn btn-light">
-              <a href="{% url 'settings' %}" class="nav-link">Ayarlar</a>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="{% url 'settings' %}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Ayarlar
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{% url 'state' %}">Durumlar</a></li>
+                <!-- <li><hr class="dropdown-divider"></li> -->
+              </ul>
             </li>
-            <li class="nav-item btn btn-light">
+            <li class="nav-item">
               <a href="#" class="nav-link">{{ user }}</a>
             </li>
-            <li class="nav-item btn btn-light">
+            <li class="nav-item">
               <a class="nav-link" href="javascript:{document.getElementById('logout').submit()}">Çıkış</a>
               <form id="logout" action="{% url 'logout' %}" method="POST">
                 {% csrf_token %}
@@ -93,7 +99,7 @@
               </form>
             </li>
             {% else %}
-            <li class="nav-item btn btn-light">
+            <li class="nav-item btn btn-outline-warning">
               <a class="nav-link" href="{% url 'register' %}">Kayıt Ol</a>
             </li>
             {% endif %}
@@ -162,9 +168,7 @@
         width: '100%',
         dropdownParent: $('.modal .modal-content')
       });
-
       var interval = setInterval(function () {
-
         var momentNow = moment();
         momentNow.locale('tr');
         $('#date-part').html(momentNow.format('DD MMMM YYYY'));
