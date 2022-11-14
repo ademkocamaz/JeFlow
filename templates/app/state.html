@@ -47,6 +47,7 @@
                             <th scope="col">#</th>
                             <th scope="col">Durum Adı</th>
                             <th scope="col">Durum Açıklaması</th>
+                            <th scope="col">Renk</th>
                             <th scope="col">Oluşturulma Tarihi</th>
                             <th scope="col">Düzenleyen</th>
                             <th scope="col">İşlemler</th>
@@ -58,6 +59,7 @@
                             <th scope="row">{{ state.id }}</th>
                             <td>{{ state.name }}</td>
                             <td>{{ state.description }}</td>
+                            <td style="background-color: {{ state.color }}">{{ state.color }}</td>
                             <td>{{ state.created_date }} | {{ state.created_date | timesince}} önce</td>
                             <td>{{ state.user }}</td>
                             <td>
@@ -85,5 +87,18 @@
         </div>
     </div>
 </div>
-
+<script>
+    $(document).ready(function () {
+        const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+        const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
+        $('#state').DataTable({
+            responsive: true,
+            dom: 'Bflrtip',
+            buttons: true,
+            language: {
+                url: 'https://cdn.datatables.net/plug-ins/1.12.1/i18n/tr.json'
+            }
+        });
+    });
+</script>
 {% endblock %}

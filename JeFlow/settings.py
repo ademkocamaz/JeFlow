@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'log',
     'crispy_forms',
     'crispy_bootstrap5',
+    'colorfield',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

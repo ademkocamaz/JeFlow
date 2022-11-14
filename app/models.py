@@ -1,12 +1,14 @@
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
+from colorfield.fields import ColorField
 
 # Create your models here.
 
 class State(models.Model):
     name=models.CharField(max_length=100,verbose_name='Durum')
     description=models.TextField(verbose_name='Açıklama', blank=True, null=True)
+    color=ColorField(default='#FFFFFF',verbose_name='Renk')
     created_date=models.DateTimeField(auto_now_add=True, verbose_name='Oluşturulma Tarihi', blank=True, null=True)
     user=models.ForeignKey(User,on_delete=models.PROTECT,verbose_name='Kullanıcı', blank=True, null=True)
 

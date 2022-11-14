@@ -54,17 +54,17 @@
                     </thead>
                     <tbody>
                         {% for process in processes %}
-                        <tr>
+                        <tr style="background-color: {{ process.state.color }}">
                             <th scope="row">{{ process.id }}</th>
                             <td>{{ process.category }}</td>
                             <td>{{ process.name }}</td>
                             <td>{{ process.description }}</td>
                             <td>
-                                {% if process.state is not None %}
-                                {{ process.state }}
-                                {% else %}
-                                -
-                                {% endif %}
+                                    {% if process.state is not None %}
+                                    {{ process.state }}
+                                    {% else %}
+                                    -
+                                    {% endif %}
                             </td>
                             <td>{{ process.created_date }} | {{ process.created_date | timesince}} önce</td>
                             <td>{{ process.user }}</td>

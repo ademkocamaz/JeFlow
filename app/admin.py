@@ -39,9 +39,9 @@ class TaskAdmin(admin.ModelAdmin):
     # list_per_page = 20
 
 class StateAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name',)
-    list_display_links = ('id',)
-    list_editable = ('name',)
+    list_display = ('id', 'name','color')
+    list_display_links = ('id','name')
+    list_editable = ('color',)
     search_fields = ('name',)
 
 admin.site.register(Category, CategoryAdmin)
