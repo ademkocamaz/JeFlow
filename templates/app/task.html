@@ -57,7 +57,7 @@
                     </thead>
                     <tbody>
                         {% for task in tasks %}
-                        <tr>
+                        <tr style="background-color: {{ task.state.color }}">
                             <th scope="row">{{ task.id }}</th>
                             <td>{{ task.process }}</td>
                             <td>{{ task.name }}</td>
