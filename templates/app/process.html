@@ -54,7 +54,7 @@
                     </thead>
                     <tbody>
                         {% for process in processes %}
-                        <tr style="background-color: {{ process.state.color }}">
+                        <tr class="bg-gradient" style="background-color: {{ process.state.color }}">
                             <th scope="row">{{ process.id }}</th>
                             <td>{{ process.category }}</td>
                             <td>{{ process.name }}</td>
