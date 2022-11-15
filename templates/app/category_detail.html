@@ -5,11 +5,11 @@
 {{ name }}
 {% load crispy_forms_tags %}
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="processModal" tabindex="-1" aria-labelledby="processModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Yeni İş Akışı</h1>
+                <h1 class="modal-title fs-5" id="processModalLabel">Yeni İş Akışı</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -72,7 +72,7 @@
                 <h3 class="card-title">
                     <i class="fa-solid fa-business-time"></i>
                     İş Akışları
-                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#processModal">
                         Yeni Ekle
                     </button>
                 </h3>
@@ -94,7 +94,7 @@
                     </thead>
                     <tbody>
                         {% for process in processes %}
-                        <tr>
+                        <tr class="bg-gradient" style="background-color: {{ process.state.color }}">
                             <th scope="row">{{ process.id }}</th>
                             <td>{{ process.category }}</td>
                             <td>{{ process.name }}</td>
