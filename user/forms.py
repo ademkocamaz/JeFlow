@@ -11,3 +11,8 @@ class ResetPasswordForm(SetPasswordForm):
     class Meta:
         model=get_user_model()
         fields=('new_password1','new_password2')
+
+class TestForm(forms.ModelForm):
+    class Meta:
+        model=get_user_model()
+        fields=('__all__')
