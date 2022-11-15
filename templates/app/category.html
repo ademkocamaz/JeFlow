@@ -95,6 +95,11 @@
                             <td>{{ category.created_date }} | {{ category.created_date | timesince}} önce</td>
                             <td>{{ category.user }}</td>
                             <td>
+                                <a href="{% url 'category_detail' category.id %}" class="btn btn-dark bg-gradient"
+                                    data-bs-toggle="popover" data-bs-trigger="hover" data-bs-title="Detaylar"
+                                    data-bs-content="Seçili satırdaki kaydın detaylarını görüntüler.">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                </a>
                                 <a class="btn btn-success bg-gradient" href="{% url 'category_update' category.id %}"
                                     data-bs-toggle="popover" data-bs-trigger="hover" data-bs-title="Düzenle"
                                     data-bs-content="Seçili satırdaki kaydı düzenler.">
