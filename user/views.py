@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth
 from django.contrib import messages
-from .forms import ProfileForm, ResetPasswordForm
+from .forms import ProfileForm, ResetPasswordForm, TestForm
 import logging
 # Create your views here.
 logger=logging.getLogger('db')
@@ -55,6 +55,14 @@ def register(request):
             return redirect('register')
 
     return render(request,'user/register.html')
+
+def test(request):
+
+    test_form=TestForm()
+    context={
+        'test_form':test_form,
+    }
+    return render(request,'user/test.html',context)
 
 def logout(request):
     if request.method=='POST':
