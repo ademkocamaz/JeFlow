@@ -77,7 +77,8 @@ def category_update(request,category_id):
             logger.error(category.name+' adında kategori güncellenirken bir hata oluştu.',extra={'user':request.user})
             for error in list(category_form.errors.values()):
                 messages.add_message(request,messages.ERROR,error)
-        return redirect('category_update',category.id)
+        # return redirect('category_update',category.id)
+        return redirect('category')
 
     category_form=CategoryForm(instance=category)
     context={
@@ -169,7 +170,8 @@ def process_update(request,process_id):
             logger.error(process.name+' adında İş Akışı güncellenirken hata oluştu.',extra={'user':request.user})
             for error in list(process_form.errors.values()):
                 messages.add_message(request,messages.ERROR,error)
-        return redirect('process_update',process_id)
+        # return redirect('process_update',process_id)
+        return redirect('process')
     
     process_form=ProcessForm(instance=process)
     context={
@@ -245,7 +247,8 @@ def activity_update(request,activity_id):
             logger.error(activity.name+' adında Aktivite güncellenirken hata oluştu.',extra={'user':request.user})
             for error in list(activity_form.errors.values()):
                 messages.add_message(request,messages.ERROR,error)
-        return redirect('activity_update',activity_id)
+        # return redirect('activity_update',activity_id)
+        return redirect('activity')
     
     activity_form=ActivityForm(instance=activity)
     context={
@@ -317,7 +320,8 @@ def task_update(request,task_id):
             logger.error(task.name+' adında Görev güncellenirken hata oluştu.',extra={'user':request.user})
             for error in list(task_form.errors.values()):
                 messages.add_message(request,messages.ERROR,error)
-        return redirect('task_update',task_id)
+        # return redirect('task_update',task_id)
+        return redirect('task')
     
     task_form=TaskForm(instance=task)
     context={
@@ -340,6 +344,15 @@ def task_delete(request,task_id):
         'task':task
     }
     return render(request,'app/task_delete.html',context)
+
+@login_required(login_url='/user/login/')
+def task_detail(request,task_id):
+    task=get_object_or_404(Task,pk=task_id)
+
+    context={
+        'task':task,
+    }
+    return render(request,'app/task_detail.html',context)
 
 @login_required(login_url='/user/login/')
 def state(request):
@@ -380,7 +393,8 @@ def state_update(request,state_id):
             logger.error(state.name+' adında Durum güncellenirken hata oluştu.',extra={'user':request.user})
             for error in list(state_form.errors.values()):
                 messages.add_message(request,messages.ERROR,error)
-        return redirect('state_update',state_id)
+        # return redirect('state_update',state_id)
+        return redirect('state')
     
     state_form=StateForm(instance=state)
     context={
