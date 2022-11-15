@@ -79,6 +79,11 @@
                             </td>
                             <td>{{ task.user }}</td>
                             <td>
+                                <a href="{% url 'task_detail' task.id %}" class="btn btn-dark bg-gradient"
+                                    data-bs-toggle="popover" data-bs-trigger="hover" data-bs-title="Detaylar"
+                                    data-bs-content="Seçili satırdaki kaydın detaylarını görüntüler.">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                </a>
                                 <a class="btn btn-success bg-gradient" href="{% url 'task_update' task.id %}"
                                     data-bs-toggle="popover" data-bs-trigger="hover" data-bs-title="Düzenle"
                                     data-bs-content="Seçili satırdaki kaydı düzenler.">
