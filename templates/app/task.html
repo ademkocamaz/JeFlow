@@ -9,7 +9,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="taskModalLabel">Yeni Aktivite</h1>
+                <h1 class="modal-title fs-5" id="taskModalLabel">Yeni Görev</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -109,20 +109,5 @@
         </div>
     </div>
 </div>
-
-<script>
-    $(document).ready(function () {
-        const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
-        const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
-        $('#task').DataTable({
-            responsive: true,
-            dom: 'Bflrtip',
-            buttons: true,
-            language: {
-                url: 'https://cdn.datatables.net/plug-ins/1.12.1/i18n/tr.json'
-            }
-        });
-    });
-</script>
 
 {% endblock %}

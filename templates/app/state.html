@@ -87,18 +87,5 @@
         </div>
     </div>
 </div>
-<script>
-    $(document).ready(function () {
-        const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
-        const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
-        $('#state').DataTable({
-            responsive: true,
-            dom: 'Bflrtip',
-            buttons: true,
-            language: {
-                url: 'https://cdn.datatables.net/plug-ins/1.12.1/i18n/tr.json'
-            }
-        });
-    });
-</script>
+
 {% endblock %}
