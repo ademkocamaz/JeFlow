@@ -3,79 +3,111 @@
 
 {% block content %}
 <div class="row mt-3">
-    <div class="col-md-3 mb-3">
-        <div id="collapseExample" class="card text-bg-primary bg-gradient" style="max-width: 18rem;">
+    <div class="col-md-3 col-sm-6 mb-3">
+        <div class="card text-bg-primary" style="max-width: 18rem;">
             <div class="card-header">
                 <h3 class="card-title">
                     <i class="fa-solid fa-list"></i>
                     Kategoriler
+                    <div class="float-end">
+                        <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseKategori" aria-expanded="false" aria-controls="collapseKategori">
+                            <i class="fa-solid fa-minus"></i>
+                        </button>
+                    </div>
                 </h3>
             </div>
-            <div class="card-body">
-                <h4 class="card-title">{{ category_count }} Adet.</h5>
-            </div>
-            <div class="card-footer text-center">
-                <a class="btn btn-primary" href="{% url 'category' %}">
-                    Daha Fazla
-                    <i class="fa-solid fa-circle-arrow-right"></i>
-                </a>
+            <div class="collapse show" id="collapseKategori">
+                <div class="card-body text-center">
+                    <h4 class="card-title">{{ category_count }} Adet.</h5>
+                </div>
+                <div class="card-footer text-center">
+                    <a class="btn btn-primary" href="{% url 'category' %}">
+                        Daha Fazla
+                        <i class="fa-solid fa-circle-arrow-right"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-md-3 mb-3">
-        <div class="card text-bg-secondary bg-gradient" style="max-width: 18rem;">
+    <div class="col-md-3 col-sm-6 mb-3">
+        <div class="card text-bg-secondary" style="max-width: 18rem;">
             <div class="card-header">
                 <h3 class="card-title">
                     <i class="fa-solid fa-business-time"></i>
                     İş Akışları
+                    <div class="float-end">
+                        <button class="btn btn-secondary btn-sm" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseIsAkis" aria-expanded="false" aria-controls="collapseIsAkis">
+                            <i class="fa-solid fa-minus"></i>
+                        </button>
+                    </div>
                 </h3>
             </div>
-            <div class="card-body">
-                <h4 class="card-title">{{ process_count }} Adet.</h5>
-            </div>
-            <div class="card-footer text-center">
-                <a class="btn btn-secondary" href="{% url 'process' %}">
-                    Daha Fazla
-                    <i class="fa-solid fa-circle-arrow-right"></i>
-                </a>
+            <div class="collapse show" id="collapseIsAkis">
+                <div class="card-body text-center">
+                    <h4 class="card-title">{{ process_count }} Adet.</h5>
+                </div>
+                <div class="card-footer text-center">
+                    <a class="btn btn-secondary" href="{% url 'process' %}">
+                        Daha Fazla
+                        <i class="fa-solid fa-circle-arrow-right"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-md-3 mb-3">
-        <div class="card text-bg-success bg-gradient" style="max-width: 18rem;">
+    <div class="col-md-3 col-sm-6 mb-3">
+        <div class="card text-bg-success" style="max-width: 18rem;">
             <div class="card-header">
                 <h3 class="card-title">
                     <i class="fa-solid fa-microchip"></i>
                     Aktiviteler
+                    <div class="float-end">
+                        <button class="btn btn-success btn-sm" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseAktivite" aria-expanded="false" aria-controls="collapseAktivite">
+                            <i class="fa-solid fa-minus"></i>
+                        </button>
+                    </div>
                 </h3>
             </div>
-            <div class="card-body">
-                <h4 class="card-title">{{ activity_count }} Adet.</h5>
-            </div>
-            <div class="card-footer text-center">
-                <a class="btn btn-success" href="{% url 'activity' %}">
-                    Daha Fazla
-                    <i class="fa-solid fa-circle-arrow-right"></i>
-                </a>
+            <div class="collapse show" id="collapseAktivite">
+                <div class="card-body text-center">
+                    <h4 class="card-title">{{ activity_count }} Adet.</h5>
+                </div>
+                <div class="card-footer text-center">
+                    <a class="btn btn-success" href="{% url 'activity' %}">
+                        Daha Fazla
+                        <i class="fa-solid fa-circle-arrow-right"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-md-3 mb-3">
-        <div class="card text-bg-danger bg-gradient" style="max-width: 18rem;">
+    <div class="col-md-3 col-sm-6 mb-3">
+        <div class="card text-bg-danger" style="max-width: 18rem;">
             <div class="card-header">
                 <h3 class="card-title">
                     <i class="fa-solid fa-list-check"></i>
                     Görevler
+                    <div class="float-end">
+                        <button class="btn btn-danger btn-sm" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseGorev" aria-expanded="false" aria-controls="collapseGorev">
+                            <i class="fa-solid fa-minus"></i>
+                        </button>
+                    </div>
                 </h3>
             </div>
-            <div class="card-body">
-                <h4 class="card-title">{{ task_count }} Adet.</h5>
-            </div>
-            <div class="card-footer text-center">
-                <a class="btn btn-danger" href="{% url 'task' %}">
-                    Daha Fazla
-                    <i class="fa-solid fa-circle-arrow-right"></i>
-                </a>
+            <div class="collapse show" id="collapseGorev">
+                <div class="card-body text-center">
+                    <h4 class="card-title">{{ task_count }} Adet.</h5>
+                </div>
+                <div class="card-footer text-center">
+                    <a class="btn btn-danger" href="{% url 'task' %}">
+                        Daha Fazla
+                        <i class="fa-solid fa-circle-arrow-right"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -83,17 +115,26 @@
 
 <div class="row mt-3">
     <div class="col-md-12">
-        <div class="card text-bg-warning bg-gradient">
+        <div class="card text-bg-warning">
             <div class="card-header">
                 <h3 class="card-title">
                     <i class="fa-solid fa-floppy-disk"></i>
                     Hareketler
+                    <div class="float-end">
+                        <button class="btn btn-warning btn-sm" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseHareketler" aria-expanded="false"
+                            aria-controls="collapseHareketler">
+                            <i class="fa-solid fa-minus"></i>
+                        </button>
+                    </div>
                 </h3>
             </div>
-            <div class="card-body">
-                {% for user_activity in user_activities %}
-                <p class="card-text"><i class="fa-solid fa-floppy-disk"></i> {{ user_activity.msg }}</p>
-                {% endfor %}
+            <div class="collapse show" id="collapseHareketler">
+                <div class="card-body">
+                    {% for user_activity in user_activities %}
+                    <p class="card-text"><i class="fa-solid fa-floppy-disk"></i> {{ user_activity.msg }}</p>
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>
