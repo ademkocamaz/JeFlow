@@ -6,7 +6,7 @@
 {{ name }}
 {% load crispy_forms_tags %}
 
-{% if categories %}
+<!-- {% if categories %}
 <div class="row mt-3">
     {% for category in categories %}
     <div class="col-md-2 mt-3">
@@ -37,7 +37,7 @@
     </div>
     {% endfor %}
 </div>
-{% endif %}
+{% endif %} -->
 
 <div class="modal fade" id="categoryModal" tabindex="-1" aria-labelledby="categoryModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -69,57 +69,67 @@
                     Kategoriler
                     <button type="button" class="btn btn-warning" data-bs-toggle="modal"
                         data-bs-target="#categoryModal">
-                        Yeni Ekle
+                        <i class="fa-regular fa-file"></i>
+                        Yeni
                     </button>
+                    <div class="float-end">
+                        <button class="btn btn-light btn-sm" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseCategory" aria-expanded="false" aria-controls="collapseCategory">
+                            <i class="fa-solid fa-minus"></i>
+                        </button>
+                    </div>
                 </h3>
             </div>
-            <div class="card-body">
-                {% if categories %}
-                <table id="category" class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Kategori Adı</th>
-                            <th scope="col">Kategori Açıklaması</th>
-                            <th scope="col">Oluşturulma Tarihi</th>
-                            <th scope="col">Düzenleyen</th>
-                            <th scope="col">İşlemler</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for category in categories %}
-                        <tr>
-                            <th scope="row">{{ category.id }}</th>
-                            <td>{{ category.name }}</td>
-                            <td>{{ category.description }}</td>
-                            <td>{{ category.created_date }} | {{ category.created_date | timesince}} önce</td>
-                            <td>{{ category.user }}</td>
-                            <td>
-                                <a href="{% url 'category_detail' category.id %}" class="btn btn-dark bg-gradient"
-                                    data-bs-toggle="popover" data-bs-trigger="hover" data-bs-title="Detaylar"
-                                    data-bs-content="Seçili satırdaki kaydın detaylarını görüntüler.">
-                                    <i class="fa-solid fa-circle-info"></i>
-                                </a>
-                                <a class="btn btn-success bg-gradient" href="{% url 'category_update' category.id %}"
-                                    data-bs-toggle="popover" data-bs-trigger="hover" data-bs-title="Düzenle"
-                                    data-bs-content="Seçili satırdaki kaydı düzenler.">
-                                    <i class="fa-solid fa-pen-to-square"></i>
-                                </a>
-                                <a class="btn btn-danger bg-gradient" href="{% url 'category_delete' category.id %}"
-                                    data-bs-toggle="popover" data-bs-trigger="hover" data-bs-title="Sil"
-                                    data-bs-content="Seçili satırdaki kaydı siler.">
-                                    <i class="fa-solid fa-trash"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-                {% else %}
-                <div class="alert alert-warning">
-                    <p>Kategori bulunamadı.</p>
+            <div class="collapse show" id="collapseCategory">
+                <div class="card-body">
+                    {% if categories %}
+                    <table id="category" class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Kategori Adı</th>
+                                <th scope="col">Kategori Açıklaması</th>
+                                <th scope="col">Oluşturulma Tarihi</th>
+                                <th scope="col">Düzenleyen</th>
+                                <th scope="col">İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for category in categories %}
+                            <tr>
+                                <th scope="row">{{ category.id }}</th>
+                                <td>{{ category.name }}</td>
+                                <td>{{ category.description }}</td>
+                                <td>{{ category.created_date }} | {{ category.created_date | timesince}} önce</td>
+                                <td>{{ category.user }}</td>
+                                <td>
+                                    <a href="{% url 'category_detail' category.id %}" class="btn btn-dark bg-gradient"
+                                        data-bs-toggle="popover" data-bs-trigger="hover" data-bs-title="Detaylar"
+                                        data-bs-content="Seçili satırdaki kaydın detaylarını görüntüler.">
+                                        <i class="fa-solid fa-circle-info"></i>
+                                    </a>
+                                    <a class="btn btn-success bg-gradient"
+                                        href="{% url 'category_update' category.id %}" data-bs-toggle="popover"
+                                        data-bs-trigger="hover" data-bs-title="Düzenle"
+                                        data-bs-content="Seçili satırdaki kaydı düzenler.">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </a>
+                                    <a class="btn btn-danger bg-gradient" href="{% url 'category_delete' category.id %}"
+                                        data-bs-toggle="popover" data-bs-trigger="hover" data-bs-title="Sil"
+                                        data-bs-content="Seçili satırdaki kaydı siler.">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                    <div class="alert alert-warning">
+                        <p>Kategori bulunamadı.</p>
+                    </div>
+                    {% endif %}
                 </div>
-                {% endif %}
             </div>
         </div>
     </div>

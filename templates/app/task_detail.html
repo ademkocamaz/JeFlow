@@ -12,51 +12,59 @@
                 <h3 class="card-title">
                     <i class="fa-solid fa-list-check"></i>
                     {{ task.name }}
+                    <div class="float-end">
+                        <button class="btn btn-sm" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseTask" aria-expanded="false" aria-controls="collapseTask">
+                            <i class="fa-solid fa-minus"></i>
+                        </button>
+                    </div>
                 </h3>
             </div>
-            <div class="card-body">
-                <div class="card">
-                    <div class="card-header">
-                        <h6 class="card-title">Açıklama</h6>
+            <div class="collapse show" id="collapseTask">
+                <div class="card-body">
+                    <div class="card">
+                        <div class="card-header">
+                            <h6 class="card-title">Açıklama</h6>
+                        </div>
+                        <div class="card-body">
+                            {% if task.description %}
+                            {{ task.description }}
+                            {% else %}
+                            Bulunamadı.
+                            {% endif %}
+                        </div>
                     </div>
-                    <div class="card-body">
-                        {% if task.description %}
-                        {{ task.description }}
-                        {% else %}
-                        Bulunamadı.
-                        {% endif %}
+                    <div class="card">
+                        <div class="card-header">
+                            <h6 class="card-title">Görev Durumu</h6>
+                        </div>
+                        <div class="card-body">
+                            {{ task.state.name }}
+                        </div>
                     </div>
-                </div>
-                <div class="card">
-                    <div class="card-header">
-                        <h6 class="card-title">Görev Durumu</h6>
+                    <div class="card">
+                        <div class="card-header">
+                            <h6 class="card-title">Atanan Personel</h6>
+                        </div>
+                        <div class="card-body">
+                            {% if task.assigned_user %}
+                            {{ task.assigned_user.username }}
+                            {% else %}
+                            Bulunamadı.
+                            {% endif %}
+                        </div>
                     </div>
-                    <div class="card-body">
-                        {{ task.state.name }}
+                    <div class="card">
+                        <div class="card-header">
+                            <h6 class="card-title">Oluşturulma Tarihi</h6>
+                        </div>
+                        <div class="card-body">
+                            {{ task.created_date }} | {{ task.created_date | timesince}} önce
+                        </div>
                     </div>
-                </div>
-                <div class="card">
-                    <div class="card-header">
-                        <h6 class="card-title">Atanan Personel</h6>
-                    </div>
-                    <div class="card-body">
-                        {% if task.assigned_user %}
-                        {{ task.assigned_user.username }}
-                        {% else %}
-                        Bulunamadı.
-                        {% endif %}
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header">
-                        <h6 class="card-title">Oluşturulma Tarihi</h6>
-                    </div>
-                    <div class="card-body">
-                        {{ task.created_date }} | {{ task.created_date | timesince}} önce
-                    </div>
-                </div>
 
 
+                </div>
             </div>
         </div>
     </div>

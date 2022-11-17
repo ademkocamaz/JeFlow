@@ -11,44 +11,52 @@
                 <h3 class="card-title">
                     <i class="fa-solid fa-microchip"></i>
                     {{ activity.name }}
+                    <div class="float-end">
+                        <button class="btn btn-sm" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseActivity" aria-expanded="false" aria-controls="collapseActivity">
+                            <i class="fa-solid fa-minus"></i>
+                        </button>
+                    </div>
                 </h3>
             </div>
-            <div class="card-body">
-                <div class="card">
-                    <div class="card-header">
-                        <h6 class="card-title">Açıklama</h6>
+            <div class="collapse show" id="collapseActivity">
+                <div class="card-body">
+                    <div class="card">
+                        <div class="card-header">
+                            <h6 class="card-title">Açıklama</h6>
+                        </div>
+                        <div class="card-body">
+                            {% if activity.description %}
+                            {{ activity.description }}
+                            {% else %}
+                            Bulunamadı.
+                            {% endif %}
+                        </div>
                     </div>
-                    <div class="card-body">
-                        {% if activity.description %}
-                        {{ activity.description }}
-                        {% else %}
-                        Bulunamadı.
-                        {% endif %}
+                    <div class="card">
+                        <div class="card-header">
+                            <h6 class="card-title">İş Akış Adı</h6>
+                        </div>
+                        <div class="card-body">
+                            {{ activity.process.name }}
+                        </div>
+
                     </div>
-                </div>
-                <div class="card">
-                    <div class="card-header">
-                        <h6 class="card-title">İş Akış Adı</h6>
-                    </div>
-                    <div class="card-body">
-                        {{ activity.process.name }}
+                    <div class="card">
+                        <div class="card-header">
+                            <h6 class="card-title">Gözlem</h6>
+                        </div>
+                        <div class="card-body">
+                            {% if activity.observation %}
+                            {{ activity.observation }}
+                            {% else %}
+                            Bulunamadı.
+                            {% endif %}
+                        </div>
                     </div>
 
-                </div>
-                <div class="card">
-                    <div class="card-header">
-                        <h6 class="card-title">Gözlem</h6>
-                    </div>
-                    <div class="card-body">
-                        {% if activity.observation %}
-                        {{ activity.observation }}
-                        {% else %}
-                        Bulunamadı.
-                        {% endif %}
-                    </div>
-                </div>
 
-
+                </div>
             </div>
         </div>
     </div>

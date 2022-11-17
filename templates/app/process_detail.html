@@ -12,55 +12,63 @@
                 <h3 class="card-title">
                     <i class="fa-solid fa-business-time"></i>
                     {{ process.name }}
+                    <div class="float-end">
+                        <button class="btn btn-sm" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseProcess" aria-expanded="false" aria-controls="collapseProcess">
+                            <i class="fa-solid fa-minus"></i>
+                        </button>
+                    </div>
                 </h3>
             </div>
-            <div class="card-body">
-                <div class="card">
-                    <div class="card-header">
-                        <h6 class="card-title">Açıklama</h6>
+            <div class="collapse show" id="collapseProcess">
+                <div class="card-body">
+                    <div class="card">
+                        <div class="card-header">
+                            <h6 class="card-title">Açıklama</h6>
+                        </div>
+                        <div class="card-body">
+                            {% if process.description %}
+                            {{ process.description }}
+                            {% else %}
+                            Bulunamadı.
+                            {% endif %}
+                        </div>
                     </div>
-                    <div class="card-body">
-                        {% if process.description %}
-                        {{ process.description }}
-                        {% else %}
-                        Bulunamadı.
-                        {% endif %}
-                    </div>
-                </div>
 
-                <div class="card">
-                    <div class="card-header">
-                        <h6 class="card-title">Aktivite</h6>
-                        </h6>
+                    <div class="card">
+                        <div class="card-header">
+                            <h6 class="card-title">Aktivite</h6>
+                            </h6>
+                        </div>
+                        <div class="card-body">
+                            {% if process.activity_count > 0 %}
+                            {{ process.activity_count }} Adet.
+                            {% else %}
+                            Bulunamadı.
+                            {% endif %}
+                        </div>
                     </div>
-                    <div class="card-body">
-                        {% if process.activity_count > 0 %}
-                        {{ process.activity_count }} Adet.
-                        {% else %}
-                        Bulunamadı.
-                        {% endif %}
-                    </div>
-                </div>
 
-                <div class="card">
-                    <div class="card-header">
-                        <h6 class="card-title">Görev</h6>
+                    <div class="card">
+                        <div class="card-header">
+                            <h6 class="card-title">Görev</h6>
+                        </div>
+                        <div class="card-body">
+                            {% if process.task_count > 0 %}
+                            {{ process.task_count }} Adet.
+                            {% else %}
+                            Bulunamadı.
+                            {% endif %}
+                        </div>
                     </div>
-                    <div class="card-body">
-                        {% if process.task_count > 0 %}
-                        {{ process.task_count }} Adet.
-                        {% else %}
-                        Bulunamadı.
-                        {% endif %}
-                    </div>
-                </div>
 
-                <div class="card">
-                    <div class="card-header">
-                        <h6 class="card-title">Durumu</h6>
-                    </div>
-                    <div class="card-body">
-                        {{ process.state }}
+                    <div class="card">
+                        <div class="card-header">
+                            <h6 class="card-title">Durumu</h6>
+                        </div>
+                        <div class="card-body">
+                            {{ process.state }}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -76,55 +84,64 @@
                 <h3 class="card-title">
                     <i class="fa-solid fa-microchip"></i>
                     Aktiviteler
+                    <div class="float-end">
+                        <button class="btn btn-sm" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseActivity" aria-expanded="false" aria-controls="collapseActivity">
+                            <i class="fa-solid fa-minus"></i>
+                        </button>
+                    </div>
                 </h3>
             </div>
-            <div class="card-body">
-                {% if activities %}
-                <table id="activity" class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">İş Adı</th>
-                            <th scope="col">Aktivite Adı</th>
-                            <th scope="col">Aktivite Açıklaması</th>
-                            <th scope="col">Gözlem</th>
-                            <th scope="col">Oluşturulma Tarihi</th>
-                            <th scope="col">Düzenleyen</th>
-                            <th scope="col">İşlemler</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for activity in activities %}
-                        <tr>
-                            <th scope="row">{{ activity.id }}</th>
-                            <td>{{ activity.process }}</td>
-                            <td>{{ activity.name }}</td>
-                            <td>{{ activity.description }}</td>
-                            <td>{{ activity.observation }}</td>
-                            <td>{{ activity.created_date }} | {{ activity.created_date | timesince}} önce</td>
-                            <td>{{ activity.user }}</td>
-                            <td>
-                                <a class="btn btn-success bg-gradient" href="{% url 'activity_update' activity.id %}"
-                                    data-bs-toggle="popover" data-bs-trigger="hover" data-bs-title="Düzenle"
-                                    data-bs-content="Seçili satırdaki kaydı düzenler.">
-                                    <i class="fa-solid fa-pen-to-square"></i>
-                                </a>
-                                <a class="btn btn-danger bg-gradient" href="{% url 'activity_delete' activity.id %}"
-                                    data-bs-toggle="popover" data-bs-trigger="hover" data-bs-title="Sil"
-                                    data-bs-content="Seçili satırdaki kaydı siler.">
-                                    <i class="fa-solid fa-trash"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+            <div class="collapse show" id="collapseActivity">
+                <div class="card-body">
+                    {% if activities %}
+                    <table id="activity" class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">İş Adı</th>
+                                <th scope="col">Aktivite Adı</th>
+                                <th scope="col">Aktivite Açıklaması</th>
+                                <th scope="col">Gözlem</th>
+                                <th scope="col">Oluşturulma Tarihi</th>
+                                <th scope="col">Düzenleyen</th>
+                                <th scope="col">İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for activity in activities %}
+                            <tr>
+                                <th scope="row">{{ activity.id }}</th>
+                                <td>{{ activity.process }}</td>
+                                <td>{{ activity.name }}</td>
+                                <td>{{ activity.description }}</td>
+                                <td>{{ activity.observation }}</td>
+                                <td>{{ activity.created_date }} | {{ activity.created_date | timesince}} önce</td>
+                                <td>{{ activity.user }}</td>
+                                <td>
+                                    <a class="btn btn-success bg-gradient"
+                                        href="{% url 'activity_update' activity.id %}" data-bs-toggle="popover"
+                                        data-bs-trigger="hover" data-bs-title="Düzenle"
+                                        data-bs-content="Seçili satırdaki kaydı düzenler.">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </a>
+                                    <a class="btn btn-danger bg-gradient" href="{% url 'activity_delete' activity.id %}"
+                                        data-bs-toggle="popover" data-bs-trigger="hover" data-bs-title="Sil"
+                                        data-bs-content="Seçili satırdaki kaydı siler.">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
 
-                {% else %}
-                <div class="alert alert-warning">
-                    <p>Aktivite bulunamadı.</p>
+                    {% else %}
+                    <div class="alert alert-warning">
+                        <p>Aktivite bulunamadı.</p>
+                    </div>
+                    {% endif %}
                 </div>
-                {% endif %}
             </div>
         </div>
     </div>
@@ -137,70 +154,78 @@
                 <h3 class="card-title">
                     <i class="fa-solid fa-list-check"></i>
                     Görevler
+                    <div class="float-end">
+                        <button class="btn btn-sm" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseTask" aria-expanded="false" aria-controls="collapseTask">
+                            <i class="fa-solid fa-minus"></i>
+                        </button>
+                    </div>
                 </h3>
             </div>
-            <div class="card-body">
-                {% if tasks %}
-                <table id="task" class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">İş Adı</th>
-                            <th scope="col">Görev Adı</th>
-                            <th scope="col">Görev Açıklaması</th>
-                            <th scope="col">Görev Durumu</th>
-                            <th scope="col">Oluşturulma Tarihi</th>
-                            <th scope="col">Atanan Personel</th>
-                            <th scope="col">Düzenleyen</th>
-                            <th scope="col">İşlemler</th>
+            <div class="collapse show" id="collapseTask">
+                <div class="card-body">
+                    {% if tasks %}
+                    <table id="task" class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">İş Adı</th>
+                                <th scope="col">Görev Adı</th>
+                                <th scope="col">Görev Açıklaması</th>
+                                <th scope="col">Görev Durumu</th>
+                                <th scope="col">Oluşturulma Tarihi</th>
+                                <th scope="col">Atanan Personel</th>
+                                <th scope="col">Düzenleyen</th>
+                                <th scope="col">İşlemler</th>
 
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for task in tasks %}
-                        <tr class="bg-gradient" style="background-color: {{ task.state.color }}">
-                            <th scope="row">{{ task.id }}</th>
-                            <td>{{ task.process }}</td>
-                            <td>{{ task.name }}</td>
-                            <td>{{ task.description }}</td>
-                            <td>
-                                {% if task.state is not None %}
-                                {{task.state}}
-                                {% else %}
-                                -
-                                {% endif %}
-                            </td>
-                            <td>{{ task.created_date }} | {{ task.created_date | timesince}} önce</td>
-                            <td>
-                                {% if task.assigned_user is not None%}
-                                {{ task.assigned_user }}
-                                {% else %}
-                                Atanmamış
-                                {% endif %}
-                            </td>
-                            <td>{{ task.user }}</td>
-                            <td>
-                                <a class="btn btn-success bg-gradient" href="{% url 'task_update' task.id %}"
-                                    data-bs-toggle="popover" data-bs-trigger="hover" data-bs-title="Düzenle"
-                                    data-bs-content="Seçili satırdaki kaydı düzenler.">
-                                    <i class="fa-solid fa-pen-to-square"></i>
-                                </a>
-                                <a class="btn btn-danger bg-gradient" href="{% url 'task_delete' task.id %}"
-                                    data-bs-toggle="popover" data-bs-trigger="hover" data-bs-title="Sil"
-                                    data-bs-content="Seçili satırdaki kaydı siler.">
-                                    <i class="fa-solid fa-trash"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for task in tasks %}
+                            <tr class="bg-gradient" style="background-color: {{ task.state.color }}">
+                                <th scope="row">{{ task.id }}</th>
+                                <td>{{ task.process }}</td>
+                                <td>{{ task.name }}</td>
+                                <td>{{ task.description }}</td>
+                                <td>
+                                    {% if task.state is not None %}
+                                    {{task.state}}
+                                    {% else %}
+                                    -
+                                    {% endif %}
+                                </td>
+                                <td>{{ task.created_date }} | {{ task.created_date | timesince}} önce</td>
+                                <td>
+                                    {% if task.assigned_user is not None%}
+                                    {{ task.assigned_user }}
+                                    {% else %}
+                                    Atanmamış
+                                    {% endif %}
+                                </td>
+                                <td>{{ task.user }}</td>
+                                <td>
+                                    <a class="btn btn-success bg-gradient" href="{% url 'task_update' task.id %}"
+                                        data-bs-toggle="popover" data-bs-trigger="hover" data-bs-title="Düzenle"
+                                        data-bs-content="Seçili satırdaki kaydı düzenler.">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </a>
+                                    <a class="btn btn-danger bg-gradient" href="{% url 'task_delete' task.id %}"
+                                        data-bs-toggle="popover" data-bs-trigger="hover" data-bs-title="Sil"
+                                        data-bs-content="Seçili satırdaki kaydı siler.">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
 
-                {% else %}
-                <div class="alert alert-warning">
-                    <p>Görev bulunamadı.</p>
+                    {% else %}
+                    <div class="alert alert-warning">
+                        <p>Görev bulunamadı.</p>
+                    </div>
+                    {% endif %}
                 </div>
-                {% endif %}
             </div>
         </div>
     </div>
