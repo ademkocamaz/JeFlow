@@ -146,10 +146,24 @@
     <div class="container mt-4">
       <div class="row mb-3">
         <div class="col-md-12">
-          <div class="card border-0 text-center text-bg-light bg-gradient">
-            <div class="card-body">
-              <h4 id="date-part" class="card-title"></h4>
-              <h5 id="time-part" class="card-title"></h5>
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">
+                Bugün
+                <div class="float-end">
+                  <button class="btn btn-light btn-sm" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseZaman" aria-expanded="false" aria-controls="collapseZaman">
+                    <i class="fa-solid fa-minus"></i>
+                  </button>
+                </div>
+              </h3>
+            </div>
+
+            <div class="collapse show" id="collapseZaman">
+              <div class="card-body text-center">
+                <h4 id="date-part" class="card-title"></h4>
+                <h5 id="time-part" class="card-title"></h5>
+              </div>
             </div>
           </div>
         </div>
