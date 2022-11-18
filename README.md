@@ -7,7 +7,12 @@ Business Process Management with Django
 ## Kullanılan Teknolojiler
 - Python 3.10.8
 - Django 4.1.2
+- jQuery 3.6.1
 - Bootstrap 5.2.2
+- Font Awesome 6.x
+- Select2 4.1.0-rc.0
+- DataTables 1.12.1
+- Moment 2.29.4
 - django-crispy-forms 1.14.0
 - crispy-bootstrap5 0.7
 - django-colorfield 0.7.2
