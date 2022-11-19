@@ -70,7 +70,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'JeFlow.urls'
+ROOT_URLCONF = 'core.urls'
 
 TEMPLATES = [
     {
@@ -88,7 +88,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'JeFlow.wsgi.application'
+WSGI_APPLICATION = 'core.wsgi.application'
 
 
 # Database
@@ -166,7 +166,7 @@ class HerokuDiscoverRunner(DiscoverRunner):
 
 # Use HerokuDiscoverRunner on Heroku CI
 if "CI" in os.environ:
-    TEST_RUNNER = "JeFlow.settings.HerokuDiscoverRunner"
+    TEST_RUNNER = "core.settings.HerokuDiscoverRunner"
 
 
 # Default primary key field type

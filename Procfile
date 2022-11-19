@@ -1,1 +1,1 @@
-web: gunicorn JeFlow.wsgi
+web: gunicorn core.wsgi
