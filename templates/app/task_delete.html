@@ -8,11 +8,11 @@
         <h3 class="card-title">Silme Onayı</h3>
     </div>
     <div class="card-body">
-        <div class="alert alert-danger d-flex align-items-center" role="alert">
+        <div class="alert alert-danger d-flex flex-column justify-content-center align-items-center" role="alert">
             <svg class="img-fluid bi flex-shrink-0 me-2" role="img" aria-label="Danger:">
                 <use xlink:href="#exclamation-triangle-fill" />
             </svg>
-            <div>
+            <div class="mt-4">
                 {{ task.name }} isimli kaydı silmek istediğinize emin misiniz?
             </div>
         </div>
@@ -23,7 +23,7 @@
             <div class="col-auto">
                 <form action="{% url 'task_delete' task.id %}" method="POST">
                     {% csrf_token %}
-                    <button class="btn btn-danger my-4" type="submit">
+                    <button class="btn btn-danger mt-4" type="submit">
                         <i class="fa-solid fa-trash fa-2xl"></i><br>Sil
                     </button>
                 </form>
