@@ -24,7 +24,7 @@ def index(request):
         'task_count':task_count,
         'user_activities':user_activities
     }
-    return render(request, 'app/index.html',context)
+    return render(request, 'app/index.html', context)
 
 @login_required(login_url='/user/login/')
 def settings(request):
