@@ -49,7 +49,7 @@
                         </div>
                         <div class="card-body">
                             {% if category.description %}
-                            {{ category.description }}
+                            {{ category.description | safe }}
                             {% else %}
                             Bulunamadı.
                             {% endif %}

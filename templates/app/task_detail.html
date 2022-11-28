@@ -28,7 +28,7 @@
                         </div>
                         <div class="card-body">
                             {% if task.description %}
-                            {{ task.description }}
+                            {{ task.description | safe }}
                             {% else %}
                             Bulunamadı.
                             {% endif %}

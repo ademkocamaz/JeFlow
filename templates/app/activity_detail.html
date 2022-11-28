@@ -27,7 +27,7 @@
                         </div>
                         <div class="card-body">
                             {% if activity.description %}
-                            {{ activity.description }}
+                            {{ activity.description | safe }}
                             {% else %}
                             Bulunamadı.
                             {% endif %}

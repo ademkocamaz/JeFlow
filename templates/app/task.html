@@ -69,7 +69,7 @@
                                 <th scope="row">{{ task.id }}</th>
                                 <td>{{ task.process }}</td>
                                 <td>{{ task.name }}</td>
-                                <td>{{ task.description }}</td>
+                                <td>{{ task.description | safe }}</td>
                                 <td>
                                     {% if task.state is not None %}
                                     {{task.state}}

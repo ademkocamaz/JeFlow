@@ -99,7 +99,7 @@
                             <tr>
                                 <th scope="row">{{ category.id }}</th>
                                 <td>{{ category.name }}</td>
-                                <td>{{ category.description }}</td>
+                                <td>{{ category.description | safe }}</td>
                                 <td>{{ category.created_date }} | {{ category.created_date | timesince}} önce</td>
                                 <td>{{ category.user }}</td>
                                 <td>
