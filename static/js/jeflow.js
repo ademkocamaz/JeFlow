@@ -30,6 +30,7 @@ $(document).ready(function () {
   }, 100);
 
   $('.table').DataTable({
+    ordering: false,
     responsive: true,
     dom: 'Bflrtip',
     buttons: true,
