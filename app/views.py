@@ -241,10 +241,10 @@ def activity_update(request,activity_id):
             activity_form.instance.user=request.user
             activity_form.save()
             messages.add_message(request,messages.INFO,'Aktivite güncellendi.')
-            logger.info(activity.name+' adında Aktivite güncellendi.',extra={'user':request})
+            logger.info(activity.name+' adında Aktivite güncellendi.',extra={'user':request.user})
         else:
             messages.add_message(request,messages.INFO,'Aktivite güncellenirken hata oluştu.')
-            logger.error(activity.name+' adında Aktivite güncellenirken hata oluştu.',extra={'user':request.user})
+            logger.error(activity.name+' adında Aktivite güncellenirken hata oluştu.', extra={'user':request.user})
             for error in list(activity_form.errors.values()):
                 messages.add_message(request,messages.ERROR,error)
         # return redirect('activity_update',activity_id)
