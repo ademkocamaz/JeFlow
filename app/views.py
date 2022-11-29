@@ -53,7 +53,7 @@ def category(request):
         return redirect('category')
     
     category_form=CategoryForm()
-    categories = Category.objects.order_by('created_date')
+    categories = Category.objects.order_by('-created_date')
     
     context = {
         'category_form':category_form,
@@ -132,7 +132,7 @@ def category_detail(request,category_id):
 @login_required(login_url='/user/login/')
 def process(request):
     if request.method=='POST':
-        process_form=ProcessForm(request.POST)
+        process_form=ProcessForm(request.POST, request.FILES)
         if process_form.is_valid():
             process_form.instance.user=request.user
             process_form.save()
@@ -147,7 +147,7 @@ def process(request):
 
     state=get_object_or_404(State,name='Yeni')
     process_form=ProcessForm(initial={'state':state})
-    processes = Process.objects.order_by('created_date')
+    processes = Process.objects.order_by('-created_date')
     context = {
         'process_form':process_form,
         'processes': processes
@@ -159,7 +159,7 @@ def process_update(request,process_id):
     process=get_object_or_404(Process,pk=process_id)
 
     if request.method=='POST':
-        process_form=ProcessForm(request.POST,instance=process)
+        process_form=ProcessForm(request.POST, request.FILES, instance=process)
         if process_form.is_valid():
             process_form.instance.user=request.user
             process_form.save()
@@ -211,7 +211,7 @@ def process_detail(request,process_id):
 @login_required(login_url='/user/login/')
 def activity(request):
     if request.method=='POST':
-        activity_form=ActivityForm(request.POST)
+        activity_form=ActivityForm(request.POST, request.FILES)
         if activity_form.is_valid():
             activity_form.instance.user=request.user
             activity_form.save()
@@ -224,7 +224,7 @@ def activity(request):
                 messages.add_message(request,messages.ERROR,error)
         return redirect('activity')
     activity_form=ActivityForm()
-    activities = Activity.objects.order_by('created_date')
+    activities = Activity.objects.order_by('-created_date')
     context = {
         'activity_form':activity_form,
         'activities': activities
@@ -236,7 +236,7 @@ def activity_update(request,activity_id):
     activity=get_object_or_404(Activity,pk=activity_id)
 
     if request.method=='POST':
-        activity_form=ActivityForm(request.POST,instance=activity)
+        activity_form=ActivityForm(request.POST, request.FILES, instance=activity)
         if activity_form.is_valid():
             activity_form.instance.user=request.user
             activity_form.save()
@@ -283,7 +283,7 @@ def activity_detail(request,activity_id):
 @login_required(login_url='/user/login/')
 def task(request):
     if request.method=='POST':
-        task_form=TaskForm(request.POST)
+        task_form=TaskForm(request.POST, request.FILES)
         if task_form.is_valid():
             task_form.instance.user=request.user
             task_form.save()
@@ -297,7 +297,7 @@ def task(request):
         return redirect('task')
     state=get_object_or_404(State,name='Yeni')
     task_form=TaskForm(initial={'state':state})
-    tasks = Task.objects.order_by('created_date')
+    tasks = Task.objects.order_by('-created_date')
     context = {
         'task_form':task_form,
         'tasks': tasks
@@ -309,7 +309,7 @@ def task_update(request,task_id):
     task=get_object_or_404(Task,pk=task_id)
 
     if request.method=='POST':
-        task_form=TaskForm(request.POST,instance=task)
+        task_form=TaskForm(request.POST, request.FILES, instance=task)
         if task_form.is_valid():
             task_form.instance.user=request.user
             task_form.save()
@@ -370,7 +370,7 @@ def state(request):
                 messages.add_message(request,messages.ERROR,error)
         return redirect('state')
     state_form=StateForm()
-    states = State.objects.order_by('created_date')
+    states = State.objects.order_by('-created_date')
     context = {
         'state_form':state_form,
         'states': states
