@@ -7,6 +7,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>JeFlow</title>
 
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+
   <!-- jQuery -->
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
 
@@ -149,31 +152,6 @@
       </symbol>
     </svg>
     <div class="container mt-4">
-      <div class="row mb-3">
-        <div class="col">
-          <div class="card">
-            <div class="card-header">
-              <h3 class="card-title">
-                <i class="fa-solid fa-calendar-week"></i>
-                Bugün
-                <div class="float-end">
-                  <button class="btn btn-light btn-sm" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#collapseZaman" aria-expanded="false" aria-controls="collapseZaman">
-                    <i class="fa-solid fa-minus"></i>
-                  </button>
-                </div>
-              </h3>
-            </div>
-
-            <div class="collapse show" id="collapseZaman">
-              <div class="card-body text-center">
-                <h4 id="date-part" class="card-title"></h4>
-                <h5 id="time-part" class="card-title"></h5>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
       {% include 'partials/_alert.html' %}
       {% block content %}
       {% endblock %}
