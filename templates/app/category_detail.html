@@ -67,6 +67,14 @@
                             {% endif %}
                         </div>
                     </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h6 class="card-title">Oluşturulma Tarihi</h6>
+                        </div>
+                        <div class="card-body">
+                            {{ category.created_date }} | {{ category.created_date | timesince}} önce
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

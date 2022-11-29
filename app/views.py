@@ -108,7 +108,7 @@ def category_detail(request,category_id):
     processes=Process.objects.all().filter(category=category)
 
     if request.method=='POST':
-        process_form=ProcessForm(request.POST)
+        process_form=ProcessForm(request.POST, request.FILES)
         if process_form.is_valid():
             process_form.instance.user=request.user
             process_form.save()
