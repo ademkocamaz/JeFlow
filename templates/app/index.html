@@ -2,9 +2,34 @@
 {% load humanize %}
 
 {% block content %}
+<div class="row mt-3">
+    <div class="col">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">
+                    <i class="fa-solid fa-calendar-week"></i>
+                    Bugün
+                    <div class="float-end">
+                        <button class="btn btn-light btn-sm" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseZaman" aria-expanded="false" aria-controls="collapseZaman">
+                            <i class="fa-solid fa-minus"></i>
+                        </button>
+                    </div>
+                </h3>
+            </div>
+
+            <div class="collapse show" id="collapseZaman">
+                <div class="card-body text-center">
+                    <h4 id="date-part" class="card-title"></h4>
+                    <h5 id="time-part" class="card-title"></h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="row mt-3">
-    <div class="col-md-3 col-sm-6 mb-3">
+    <div class="col-lg-3 col-6 mb-3">
         <div class="card text-bg-primary" style="max-width: 18rem;">
             <div class="card-header">
                 <h3 class="card-title">
@@ -31,7 +56,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-3 col-sm-6 mb-3">
+    <div class="col-lg-3 col-6 mb-3">
         <div class="card text-bg-secondary" style="max-width: 18rem;">
             <div class="card-header">
                 <h3 class="card-title">
@@ -58,7 +83,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-3 col-sm-6 mb-3">
+    <div class="col-lg-3 col-6 mb-3">
         <div class="card text-bg-success" style="max-width: 18rem;">
             <div class="card-header">
                 <h3 class="card-title">
@@ -85,7 +110,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-3 col-sm-6 mb-3">
+    <div class="col-lg-3 col-6 mb-3">
         <div class="card text-bg-danger" style="max-width: 18rem;">
             <div class="card-header">
                 <h3 class="card-title">
