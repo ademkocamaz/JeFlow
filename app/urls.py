@@ -39,5 +39,7 @@ urlpatterns = [
 
     path('settings/', views.settings, name='settings'),
 
+    path('my-tasks/', views.my_tasks, name='my_tasks')
+
 
 ]

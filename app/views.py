@@ -417,3 +417,13 @@ def state_delete(request,state_id):
         'state':state
     }
     return render(request,'app/state_delete.html',context)
+
+def my_tasks(request):
+    state=get_object_or_404(State,name='Yeni')
+    task_form=TaskForm(initial={'state':state, 'assigned_user':request.user})
+    tasks = Task.objects.all().filter(assigned_user=request.user).order_by('-created_date')
+    context = {
+        'task_form':task_form,
+        'tasks': tasks
+    }
+    return render(request, 'app/task.html', context)
