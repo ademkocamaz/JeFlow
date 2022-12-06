@@ -4,8 +4,8 @@ Business Process Management with Django
 **[Trello](https://trello.com/invite/b/C80dHD63/ATTI63e2564a84497da00aba8156b3c1bec2993585B5/jeflow)** üzerinde takip edebilirsiniz.
 
 **[Heroku](https://jeflow.herokuapp.com/)** üzerinde ve **[PythonAnywhere](https://ademkocamaz.pythonanywhere.com/)** üzerinde canlı görebilir ve test edebilirsiniz.
-#### Kullanıcı Adı: demo
-#### Şifre: demo1234
+Kullanıcı Adı: **demo**
+Şifre: **demo1234**
 
 ## Kullanılan Teknolojiler
 - Python 3.10.8
