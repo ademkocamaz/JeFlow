@@ -6,7 +6,7 @@ Business Process Management with Django
 **[Heroku](https://jeflow.herokuapp.com/)** üzerinde ve **[PythonAnywhere](https://ademkocamaz.pythonanywhere.com/)** üzerinde canlı görebilir ve test edebilirsiniz.
 
 #### Kullanıcı Adı: demo
-#### Şifre:         demo1234
+#### Şifre: demo1234
 
 ## Kullanılan Teknolojiler
 - Python 3.10.8
