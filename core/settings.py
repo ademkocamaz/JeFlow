@@ -97,11 +97,38 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 MAX_CONN_AGE=600
 
-DATABASES = {
+""" needs mssql-django
+    DATABASES = {
+    "default": {
+        "ENGINE": "mssql",
+        "NAME": "DATABASE_NAME",
+        "USER": "USER_NAME",
+        "PASSWORD": "PASSWORD",
+        "HOST": "HOST_ADDRESS",
+        "PORT": "1433",
+        "OPTIONS": {"driver": "ODBC Driver 17 for SQL Server", 
+        },
+    },
+} """
+
+""" DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
+} """
+
+DATABASES = {
+    "default": {
+        "ENGINE": "mssql",
+        "NAME": "JEFLOW",
+        "USER": "SA",
+        "PASSWORD": "764864",
+        "HOST": "localhost",
+        "PORT": "1433",
+        "OPTIONS": {"driver": "ODBC Driver 17 for SQL Server", 
+        },
+    },
 }
 
 if "DATABASE_URL" in os.environ:
